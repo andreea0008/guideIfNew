@@ -1,0 +1,36 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MainForm.ui.qml</file>
+        <file>Delegates/RestDelegate.qml</file>
+        <file>Delegates/Address.qml</file>
+        <file>Delegates/Phones.qml</file>
+        <file>Delegates/img/phone-call-button.png</file>
+        <file>Delegates/Cuisine.qml</file>
+        <file>Delegates/img/favourite-star_not_selected.png</file>
+        <file>Delegates/img/favourite-star_is_selected.png</file>
+        <file>Delegates/img/star.png</file>
+        <file>Delegates/img/crown.png</file>
+        <file>Delegates/Head.qml</file>
+        <file>Window/PanelManager.qml</file>
+        <file>Window/Button.qml</file>
+        <file>Cells/Check.qml</file>
+        <file>Window/img/ic_burger_menu.png</file>
+        <file>Window/img/ic_settings.png</file>
+        <file>Delegates/lists/DelegateSceneItemsList.qml</file>
+        <file>Delegates/lists/DraggableItemDropArea.qml</file>
+        <file>Cells/OnlineButton.qml</file>
+        <file>Delegates/img/left-arrow.png</file>
+        <file>TopHead.qml</file>
+        <file>Category/RestaurantsList.qml</file>
+        <file>StackCategory.qml</file>
+        <file>StackLoverCategory.qml</file>
+        <file>StackFavoriteCategory.qml</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file>fonts/Bodoni-Bold-Cyrillic.ttf</file>
+        <file>fonts/Journal-Cyrillic.ttf</file>
+        <file>fonts/Journal-Italic-Cyrillic.ttf</file>
+        <file>fonts/helvetica.otf</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/xmls">
+        <file>xmls/DefaultListCategory.xml</file>
+        <file>xmls/xmlLists/restourants.xml</file>
+    </qresource>
+</RCC>
