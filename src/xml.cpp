@@ -20,7 +20,6 @@ xml *xml::getInstance()
 
 void xml::saveCategory(QList<MyCategory*> &listCategory, bool isDefault)
 {
-    qDebug() << __FUNCTION__ << isDefault;
     QString fileName = defaultPathToFile;
     if(!isDefault)
         fileName = customPathToFile;
@@ -54,7 +53,6 @@ void xml::saveCategory(QList<MyCategory*> &listCategory, bool isDefault)
 
 bool xml::loadCategory(QList<MyCategory *> &listCategory, bool isCustom)
 {
-    qDebug() << QDir::homePath() << isCustom;
     QString fileName;
     QFile fileForReadCategory;
 
@@ -69,7 +67,6 @@ bool xml::loadCategory(QList<MyCategory *> &listCategory, bool isCustom)
 
 
     if(fileForReadCategory.open(QIODevice::ReadOnly)){
-        qDebug() << "file_open";
         QXmlStreamReader xmlReader;
         xmlReader.setDevice(&fileForReadCategory);
 
@@ -104,7 +101,7 @@ bool xml::loadCompany(QList<Company *> &listCompany, QString &pathToFile, bool i
 
     QFile file(":/xmls/xmls/xmlLists/restourants.xml");
     if(!file.open(QIODevice::ReadOnly)){
-        qDebug() << "f_not_open";
+        qWarning("f_not_open");
         return false;
     }
 
@@ -120,16 +117,19 @@ bool xml::loadCompany(QList<Company *> &listCompany, QString &pathToFile, bool i
             continue;
         }
         if(xmlReader.name() == "item"){
+            QString nameCompany, address;
             while(xmlReader.readNextStartElement()){
-                if(xmlReader.name() == "restourant" ){
-                    QString nameCompany = xmlReader.readElementText();
-                    listCompany.push_back(new Company(nameCompany));
-                }
+                if(xmlReader.name() == "restourant" )
+                    nameCompany = xmlReader.readElementText();
+                else if(xmlReader.name() == "address")
+                    address = xmlReader.readElementText();
                 else
                     xmlReader.skipCurrentElement();
             }
+            if(!nameCompany.isEmpty()){
+                listCompany.push_back(new Company(nameCompany, address, "00-00", "24-00"));
+            }
         }
-
     }
 
     return false;

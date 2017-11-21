@@ -5,6 +5,12 @@
 ListCompany::ListCompany(QObject *parent) : QAbstractItemModel(parent)
 {
     m_rolesList[NameCompany] = "nameCompany";
+    m_rolesList[AddressCompany] = "addressCompany";
+    m_rolesList[HourFrom] = "hourFrom";
+    m_rolesList[HourTo] = "hourTo";
+    m_rolesList[TypeSpecialization] = "typeSpecialization";
+    m_rolesList[Description] = "description";
+
 //    addCompany("Rest_1");
 //    addCompany("Rest_2");
 //    addCompany("Rest_3");
@@ -41,6 +47,11 @@ QVariant ListCompany::data(const QModelIndex &index, int role) const
     Company *currentCompany = m_dataCompany[index.row()];
     switch (role) {
     case NameCompany: return currentCompany->getNameCompany();
+    case AddressCompany: return currentCompany->getAddressCompany();
+    case HourFrom: return currentCompany->getHourFromWork();
+    case HourTo: return currentCompany->getHourToWork();
+    case TypeSpecialization: return currentCompany->getTypeSpecialization();
+    case Description: return currentCompany->getDescription();
     default: return QVariant();
     }
     return QVariant();
