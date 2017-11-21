@@ -7,16 +7,21 @@ ScrollView{
     id: scrollView
     horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
     verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
-    Item {
+    property string nameCompany: ""
+    property string address: ""
+    Rectangle {
         id: mainItem
-        property alias nameRestText: head.nameRestourant
-        property alias addressLabelText: address.addressLabelText
-        property alias address: address.addressText
-        property alias descriptionText: description.text
+//        property alias nameRestText: head.nameRestourant
+//        property alias addressLabelText: address.addressLabelText
+//        property alias address: address.addressText
+//        property alias descriptionText: description.text
         width: scrollView.width
         height: getHeightColumn()
 
+
         property real shadow: 0.6
+
+        color: "#1b1b1b"
 
         Column{
             anchors.fill: parent
@@ -28,6 +33,7 @@ ScrollView{
                 onAddToCrown:  console.log(isCrown)
                 onAddToFavorite: console.log(isFavorite)
                 onAddToLove: console.log(isLove)
+                nameRestourant: scrollView.nameCompany
             }
 
             Address{
@@ -35,6 +41,7 @@ ScrollView{
                 height: 80
                 width: parent.width
                 addressLabelText: "Address:"
+                addressText: scrollView.address
             }
 
             Phones{

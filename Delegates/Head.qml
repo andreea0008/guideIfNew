@@ -9,6 +9,8 @@ Item{
     signal addToLove(var isLove)
 
     property alias nameRestourant: nameRest.text
+    property real shadow: 0.5
+    property color shadowColor: "#1b1b1b"
     Text{
         id: nameRest
         anchors.left: parent.left
@@ -19,6 +21,7 @@ Item{
         verticalAlignment: Text.AlignVCenter
         text: "Eataly"
         color: "#f40612"
+        wrapMode: Text.Wrap
     }
 
     Item{
@@ -42,7 +45,7 @@ Item{
 
             Rectangle{
                 anchors.fill: parent
-                color: "#1b1b1b"
+                color: shadowColor
                 visible: !parent.isSelected
                 opacity: shadow
             }
@@ -73,7 +76,7 @@ Item{
 
                 Rectangle{
                     anchors.fill: parent
-                    color: "#1b1b1b"
+                    color: shadowColor
                     visible: !parent.isSelected
                     opacity: shadow
                 }
@@ -104,7 +107,7 @@ Item{
 
                 Rectangle{
                     anchors.fill: parent
-                    color: "#1b1b1b"
+                    color: shadowColor
                     visible: !parent.isSelected
                     opacity: shadow
                 }

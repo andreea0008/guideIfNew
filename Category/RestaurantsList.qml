@@ -61,7 +61,11 @@ Item{
 
             onMoveRectangleRequested: CATEGORY.move(from, to)
 
-            onClick: stackAllCategory.push("qrc:/Delegates/RestDelegate.qml")
+            onClick: stackAllCategory.push("qrc:/Delegates/RestDelegate.qml",
+                                           {
+                                               "nameCompany":nameCompany,
+                                               "address":addressCompany
+                                           })
 
         }
     }
