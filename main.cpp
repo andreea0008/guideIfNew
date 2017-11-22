@@ -4,6 +4,7 @@
 #include "src/settings.h"
 #include "src/lovecompanies.h"
 #include "src/favoritecompanies.h"
+#include "src/crowncompanies.h"
 #include "src/listcompany.h"
 #include <QQmlContext>
 
@@ -19,6 +20,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("CATEGORY", new Category(&engine));
     engine.rootContext()->setContextProperty("LoveCompanies", new Lovecompanies(&engine));
     engine.rootContext()->setContextProperty("FavoriteCompanies", new FavoriteCompanies(&engine));
+    engine.rootContext()->setContextProperty("CrownCompanies", new CrownCompanies(&engine));
     engine.rootContext()->setContextProperty("ListCompanies", new ListCompany(&engine));
     engine.rootContext()->setContextProperty("Settings", new Settings(&engine));
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

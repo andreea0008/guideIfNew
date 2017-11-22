@@ -116,6 +116,11 @@ Window {
         panelManager: panelManager
     }
 
+    StackCrownCategory{
+        id: stackCrownCategory
+        panelManager: panelManager
+    }
+
     //bottom
     PanelManager{
         id: panelManager
