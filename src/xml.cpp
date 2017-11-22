@@ -18,7 +18,7 @@ xml *xml::getInstance()
     return instance;
 }
 
-void xml::saveCategory(QList<MyCategory*> &listCategory, bool isDefault)
+void xml::saveCategory(QVector<MyCategory*> &listCategory, bool isDefault)
 {
     QString fileName = defaultPathToFile;
     if(!isDefault)
@@ -51,7 +51,7 @@ void xml::saveCategory(QList<MyCategory*> &listCategory, bool isDefault)
     fileForWriteCategory.close();
 }
 
-bool xml::loadCategory(QList<MyCategory *> &listCategory, bool isCustom)
+bool xml::loadCategory(QVector<MyCategory *> &listCategory, bool isCustom)
 {
     QString fileName;
     QFile fileForReadCategory;
@@ -94,7 +94,7 @@ bool xml::loadCategory(QList<MyCategory *> &listCategory, bool isCustom)
     return false;
 }
 
-bool xml::loadCompany(QList<Company *> &listCompany, QString &pathToFile, bool isDefault)
+bool xml::loadCompany(QVector<Company *> &listCompany, QString &pathToFile, bool isDefault)
 {
     Q_UNUSED(pathToFile);
     Q_UNUSED(isDefault);

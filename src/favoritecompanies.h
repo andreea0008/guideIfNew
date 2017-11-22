@@ -26,7 +26,7 @@ public:
 private:
     enum CompanyRoles{ NameCompany};
     QHash<int, QByteArray> m_roles;
-    QList<Company *> m_dataCompany;
+    QVector<Company *> m_dataCompany;
 };
 
 #endif // FAVORITECOMPANIES_H

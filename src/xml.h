@@ -7,10 +7,10 @@ class xml
 public:
     static xml* getInstance();
 
-    void saveCategory(QList<MyCategory *> &listCategory, bool isDefault = true);
-    bool loadCategory(QList<MyCategory *> &listCategory, bool isCustom = true);
+    void saveCategory(QVector<MyCategory *> &listCategory, bool isDefault = true);
+    bool loadCategory(QVector<MyCategory *> &listCategory, bool isCustom = true);
 
-    bool loadCompany(QList<Company *> &listCompany, QString &pathToFile, bool isDefault = true);
+    bool loadCompany(QVector<Company *> &listCompany, QString &pathToFile, bool isDefault = true);
 
     bool isExistDefaultFile();
     bool isExistCustomFile();

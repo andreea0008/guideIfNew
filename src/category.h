@@ -54,8 +54,8 @@ private:
     enum MyCategoryRoles{ Id, NameRole, PathToFile, UrlFile };
     bool isMoved;
     QHash<int, QByteArray> m_roles;
-    QList<MyCategory *> m_data;
-    QList<MyCategory *> tmpCat;
+    QVector<MyCategory *> m_data;
+    QVector<MyCategory *> tmpCat;
 };
 
 #endif // CATEGORY_H

@@ -2,6 +2,7 @@
 #define COMPANY_H
 
 #include <QObject>
+#include <QVector>
 
 class Company : public QObject{
     Q_OBJECT
@@ -12,7 +13,7 @@ public:
            const QString &specialization = "", const QString &description = "", QObject *parent = 0);
     QString getNameCompany() const { return m_company; }
     QString getAddressCompany() const { return m_address; }
-    QList<QString> getListPhones() const {return m_phones; }
+    QVector<QString> getListPhones() const {return m_phones; }
     QString getHourFromWork() const { return m_hourFrom; }
     QString getHourToWork() const { return m_hourTo; }
     QString getTypeSpecialization() const {return m_typeSpecialization; }
@@ -21,7 +22,7 @@ public:
 private:
     QString m_company;
     QString m_address;
-    QList<QString> m_phones;
+    QVector<QString> m_phones;
     QString m_hourFrom, m_hourTo;
     QString m_typeSpecialization;
     QString m_description;
