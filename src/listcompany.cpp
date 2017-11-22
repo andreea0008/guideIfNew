@@ -81,7 +81,10 @@ void ListCompany::setPathToFileAboutCompany(QString path)
 
     qDebug() << "count_item_company" << m_dataCompany.count();
 
-    xml::getInstance()->loadCompany(m_dataCompany, fileAboutCompany);
+    QString tag = "boutique";
+    xml::getInstance()->loadCompany(m_dataCompany, tag);
+
+    qDebug() << "count_item_company_after_load" << m_dataCompany.count();
 }
 
 void ListCompany::addCompany(const QString &nameCompany)

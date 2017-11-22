@@ -10,7 +10,7 @@ public:
     void saveCategory(QVector<MyCategory *> &listCategory, bool isDefault = true);
     bool loadCategory(QVector<MyCategory *> &listCategory, bool isCustom = true);
 
-    bool loadCompany(QVector<Company *> &listCompany, QString &pathToFile, bool isDefault = true);
+    bool loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefault = true);
 
     bool isExistDefaultFile();
     bool isExistCustomFile();

@@ -7,10 +7,15 @@ Item{
     signal addToCrown(var isCrown)
     signal addToFavorite(var isFavorite)
     signal addToLove(var isLove)
-
     property alias nameRestourant: nameRest.text
-    property real shadow: 0.5
-    property color shadowColor: "#1b1b1b"
+
+    QtObject{
+        id: privateProperties
+        property real shadow: 0.5
+        property color shadowColor: "#1b1b1b"
+        property color colorNameCompany: "#f40612"
+    }
+
     Text{
         id: nameRest
         anchors.left: parent.left
@@ -20,7 +25,7 @@ Item{
         font.pointSize: 20
         verticalAlignment: Text.AlignVCenter
         text: "Eataly"
-        color: "#f40612"
+        color: privateProperties.colorNameCompany
         wrapMode: Text.Wrap
     }
 
@@ -45,9 +50,9 @@ Item{
 
             Rectangle{
                 anchors.fill: parent
-                color: shadowColor
+                color: privateProperties.shadowColor
                 visible: !parent.isSelected
-                opacity: shadow
+                opacity: privateProperties.shadow
             }
 
             MouseArea{
@@ -76,9 +81,9 @@ Item{
 
                 Rectangle{
                     anchors.fill: parent
-                    color: shadowColor
+                    color: privateProperties.shadowColor
                     visible: !parent.isSelected
-                    opacity: shadow
+                    opacity: privateProperties.shadow
                 }
 
                 MouseArea{
@@ -107,9 +112,9 @@ Item{
 
                 Rectangle{
                     anchors.fill: parent
-                    color: shadowColor
+                    color: privateProperties.shadowColor
                     visible: !parent.isSelected
-                    opacity: shadow
+                    opacity: privateProperties.shadow
                 }
 
                 MouseArea{

@@ -2,5 +2,6 @@
     <qresource prefix="/xmls">
         <file>xmls/DefaultListCategory.xml</file>
         <file>xmls/xmlLists/restourants.xml</file>
+        <file>xmls/xmlLists/companies.xml</file>
     </qresource>
 </RCC>

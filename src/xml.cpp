@@ -94,18 +94,19 @@ bool xml::loadCategory(QVector<MyCategory *> &listCategory, bool isCustom)
     return false;
 }
 
-bool xml::loadCompany(QVector<Company *> &listCompany, QString &pathToFile, bool isDefault)
+bool xml::loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefault)
 {
-    Q_UNUSED(pathToFile);
     Q_UNUSED(isDefault);
 
-    QFile file(":/xmls/xmls/xmlLists/restourants.xml");
+//    QFile file(":/xmls/xmls/xmlLists/restourants.xml");
+    QFile file(":/xmls/xmls/xmlLists/companies.xml");
+
     if(!file.open(QIODevice::ReadOnly)){
         qWarning("f_not_open");
         return false;
     }
 
-    qDebug() << "f_open";
+    qDebug() << "f_open tag is: " << tag ;
     QXmlStreamReader xmlReader(&file);
 
     listCompany.clear();
@@ -114,6 +115,9 @@ bool xml::loadCompany(QVector<Company *> &listCompany, QString &pathToFile, bool
             continue;
         }
         if(xmlReader.name() == "channel"){
+            continue;
+        }
+        if(xmlReader.name() == tag){
             continue;
         }
         if(xmlReader.name() == "item"){
