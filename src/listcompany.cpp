@@ -87,6 +87,19 @@ void ListCompany::setPathToFileAboutCompany(QString path)
     qDebug() << "count_item_company_after_load" << m_dataCompany.count();
 }
 
+void ListCompany::setTagGroup(QString tag)
+{
+    if(!m_dataCompany.isEmpty()){
+        for(int i = 0; i< m_dataCompany.size(); i++){
+            beginRemoveRows(QModelIndex(), i, i);
+            m_dataCompany.removeAt(i);
+            endRemoveRows();
+        }
+    }
+
+    xml::getInstance()->loadCompany(m_dataCompany, tag);
+}
+
 void ListCompany::addCompany(const QString &nameCompany)
 {
     beginInsertRows(QModelIndex(), m_dataCompany.count(), m_dataCompany.count());

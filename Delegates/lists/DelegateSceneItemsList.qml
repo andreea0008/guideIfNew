@@ -16,6 +16,8 @@ Item{
     signal visibleItemsChange(var isVisibleItem)
     signal moveRectangleRequested(int from, int to)
     signal click();
+    signal pressedButton();
+    signal releaseButton();
 
     width: contentItem.width
     height: contentItem.height
@@ -44,11 +46,14 @@ Item{
             drag.axis: Drag.YAxis
             drag.smoothed: false
 
+            onPressed: pressedButton()
+
             onClicked: click()
 
             onReleased: {
                 if(drag.active)
                     root.moveRectangleRquested()
+                releaseButton()
             }
         }
 

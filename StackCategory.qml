@@ -48,6 +48,8 @@ StackView{
 
                 height: stackAllCategory.height / 15
 
+                property bool isPressed: false
+
                 Rectangle{
                     anchors.fill: parent
                     color: "#1b1b1b"
@@ -56,8 +58,12 @@ StackView{
                 Rectangle{
                     width: parent.width
                     height: delegateItem.height
-                    color: "#2b2b2a"//"#141414"
                     radius: height / 8
+
+                    gradient: Gradient{
+                        GradientStop{ position: 0.0; color: "#2b2b2a"}
+                        GradientStop{ position: 1.0; color: delegateItem.isPressed ? "#141414" : "#2b2b2a" }
+                    }
 
                     property int halfHeight: height/2
                     Text {
@@ -77,9 +83,13 @@ StackView{
 
                 onMoveRectangleRequested: CATEGORY.move(from, to)
 
+                onPressedButton: isPressed = true
+
+                onReleaseButton: isPressed = false
                 onClick: {
-                    ListCompanies.setPathToFileAboutCompany(pathToFileCategory)
-                    stackAllCategory.push(Qt.resolvedUrl(pathToFileCategory))
+                    ListCompanies.setTagGroup(tag)
+                    if(pathToFileCategory !== "path_offline_category")
+                        stackAllCategory.push(Qt.resolvedUrl(pathToFileCategory))
                 }
 
             }

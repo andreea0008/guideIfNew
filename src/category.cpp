@@ -13,6 +13,7 @@ Category::Category(QObject *parent) : QAbstractItemModel(parent),
     m_roles[Id] = "categoryId";
     m_roles[PathToFile] = "pathToFileCategory";
     m_roles[UrlFile] = "urlCategory";
+    m_roles[Tag] = "tag";
     !loadCategoryFromFile();
     connect(this, &QAbstractItemModel::rowsMoved, this, &Category::sltRowsMoved);
 }
@@ -57,6 +58,8 @@ QVariant Category::data(const QModelIndex &index, int role) const
         return currentItem->getPathToFile();
     case UrlFile:
         return currentItem->getUrlToFile();
+    case Tag:
+        return currentItem->getTag();
     default:
         return QVariant();
     }
@@ -149,8 +152,8 @@ MyCategory::MyCategory(const unsigned int id, const QString &category, const QSt
 
 }
 
-MyCategory::MyCategory(const unsigned int id, const QString &category, const QString &pathToFile, const QString &pathToFileOnline, QObject *parent)
-    : QObject(parent), m_id(id), m_category(category), m_pathToFile(pathToFile), m_urlToFile(pathToFileOnline)
+MyCategory::MyCategory(const unsigned int id, const QString &category, const QString &pathToFile, const QString &pathToFileOnline, const QString &tag, QObject *parent)
+    : QObject(parent), m_id(id), m_category(category), m_pathToFile(pathToFile), m_urlToFile(pathToFileOnline), m_tag(tag)
 {
 
 }

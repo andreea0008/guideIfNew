@@ -41,6 +41,7 @@ void xml::saveCategory(QVector<MyCategory*> &listCategory, bool isDefault)
             xmlWriter.writeTextElement("name_category", listCategory.at(i)->getCategory());
             xmlWriter.writeTextElement("path_offline", listCategory.at(i)->getPathToFile());
             xmlWriter.writeTextElement("path_online", "path_online_category");
+            xmlWriter.writeTextElement("tag", listCategory.at(i)->getTag());
             xmlWriter.writeEndElement();
         }
     }
@@ -73,7 +74,7 @@ bool xml::loadCategory(QVector<MyCategory *> &listCategory, bool isCustom)
         if(xmlReader.readNextStartElement()){
             if(xmlReader.name() == "category"){
                 while (xmlReader.readNextStartElement()) {
-                    QString cat, pOff, pOn;
+                    QString cat, pOff, pOn, tag;
                     while (xmlReader.readNextStartElement()){
                         if(xmlReader.name() == "name_category")
                             cat = xmlReader.readElementText();
@@ -83,9 +84,12 @@ bool xml::loadCategory(QVector<MyCategory *> &listCategory, bool isCustom)
 
                         if(xmlReader.name() == "path_online")
                             pOn = xmlReader.readElementText();
+
+                        if(xmlReader.name() == "tag")
+                            tag = xmlReader.readElementText();
                     }
                     if(!cat.isEmpty())
-                        listCategory.push_back(new MyCategory(listCategory.size() +1, cat, pOff, pOn));
+                        listCategory.push_back(new MyCategory(listCategory.size() +1, cat, pOff, pOn, tag));
                 }
             }
         }

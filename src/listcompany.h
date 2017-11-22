@@ -20,6 +20,7 @@ public:
     QHash<int, QByteArray> roleNames() const;
 
     Q_INVOKABLE void setPathToFileAboutCompany(QString path);
+    Q_INVOKABLE void setTagGroup(QString tag);
     Q_INVOKABLE void addCompany(const QString &nameCompany);
 
 

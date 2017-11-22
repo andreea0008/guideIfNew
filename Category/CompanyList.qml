@@ -37,11 +37,18 @@ Item{
                 color: "#1b1b1b"
             }
 
+            property bool isPressed: false
+
             Rectangle{
                 width: parent.width
                 height: delegateItem.height
-                color: "#2b2b2a"//"#141414"
+//                color: "#2b2b2a"//"#141414"
                 radius: height / 8
+
+                gradient: Gradient{
+                    GradientStop{ position: 0.0; color: "#2b2b2a"}
+                    GradientStop{ position: 1.0; color: delegateItem.isPressed ? "#141414" : "#2b2b2a" }
+                }
 
                 property int halfHeight: height/2
                 Text {
@@ -58,6 +65,10 @@ Item{
             }
 
             draggedItemParent: list
+
+            onPressedButton: isPressed = true
+
+            onReleaseButton: isPressed = false
 
             onMoveRectangleRequested: CATEGORY.move(from, to)
 

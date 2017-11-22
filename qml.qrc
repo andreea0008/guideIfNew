@@ -22,10 +22,10 @@
         <file>Cells/OnlineButton.qml</file>
         <file>Delegates/img/left-arrow.png</file>
         <file>TopHead.qml</file>
-        <file>Category/RestaurantsList.qml</file>
         <file>StackCategory.qml</file>
         <file>StackLoverCategory.qml</file>
         <file>StackFavoriteCategory.qml</file>
+        <file>Category/CompanyList.qml</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/Bodoni-Bold-Cyrillic.ttf</file>
