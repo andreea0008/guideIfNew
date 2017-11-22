@@ -105,8 +105,6 @@ bool xml::loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefa
         qWarning("f_not_open");
         return false;
     }
-
-    qDebug() << "f_open tag is: " << tag ;
     QXmlStreamReader xmlReader(&file);
 
     listCompany.clear();
@@ -118,21 +116,25 @@ bool xml::loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefa
             continue;
         }
         if(xmlReader.name() == tag){
-            continue;
-        }
-        if(xmlReader.name() == "item"){
-            QString nameCompany, address;
+            qDebug() << xmlReader.name();
             while(xmlReader.readNextStartElement()){
-                if(xmlReader.name() == "restourant" )
-                    nameCompany = xmlReader.readElementText();
-                else if(xmlReader.name() == "address")
-                    address = xmlReader.readElementText();
-                else
-                    xmlReader.skipCurrentElement();
+                if(xmlReader.name() == "item"){
+                    QString nameCompany, address;
+                    while(xmlReader.readNextStartElement()){
+                        if(xmlReader.name() == "restourant" )
+                            nameCompany = xmlReader.readElementText();
+                        else if(xmlReader.name() == "address")
+                            address = xmlReader.readElementText();
+                        else
+                            xmlReader.skipCurrentElement();
+                    }
+                    if(!nameCompany.isEmpty()){
+                        listCompany.push_back(new Company(nameCompany, address, "00-00", "24-00"));
+                    }
+                }
             }
-            if(!nameCompany.isEmpty()){
-                listCompany.push_back(new Company(nameCompany, address, "00-00", "24-00"));
-            }
+        }else{
+            xmlReader.skipCurrentElement();
         }
     }
 
