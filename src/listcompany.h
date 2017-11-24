@@ -26,7 +26,7 @@ public:
 
 private:
     QString fileAboutCompany;
-    enum ListCompanyRoles{ NameCompany, AddressCompany, HourFrom, HourTo, TypeSpecialization, Description } ;
+    enum ListCompanyRoles{ Id, NameCompany, AddressCompany, HourFrom, HourTo, TypeSpecialization, Description } ;
     QHash<int, QByteArray> m_rolesList;
     QVector<Company*> m_dataCompany;
 };

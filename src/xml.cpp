@@ -3,11 +3,14 @@
 #include <QXmlStreamWriter>
 #include <QFile>
 #include <QDir>
+#include <QString>
+
 xml *xml::instance = 0;
 
 xml::xml()
     :defaultPathToFile("DefaultListCategory.xml"),
-      customPathToFile("CustomListCategory.xml")
+      customPathToFile("CustomListCategory.xml"),
+      crownCompany("CrowmCompany.xml")
 {
 }
 
@@ -98,6 +101,64 @@ bool xml::loadCategory(QVector<MyCategory *> &listCategory, bool isCustom)
     return false;
 }
 
+void xml::saveCrownCategory(QVector<Company *> &listCompany)
+{
+    QFile fileForWriteCrownCathegory(crownCompany);
+    if(!fileForWriteCrownCathegory.open((QIODevice::WriteOnly))){
+        qWarning("file_crown_company not open");
+        return;
+    }
+
+    QXmlStreamWriter xmlWriter(&fileForWriteCrownCathegory);
+    xmlWriter.setAutoFormatting(true);
+    xmlWriter.writeStartDocument();
+    xmlWriter.writeStartElement("CROWN");
+    if(listCompany.count() != 0){
+        for(int i = 0; i < listCompany.size(); i++){
+            xmlWriter.writeStartElement("crown_id_company" + QString::number(i+1));
+            xmlWriter.writeTextElement("id", QString::number(listCompany[i]->getIdCompany()));
+            xmlWriter.writeTextElement("name_company", listCompany[i]->getNameCompany());
+
+            xmlWriter.writeEndElement();
+        }
+    }
+    xmlWriter.writeEndElement();
+    xmlWriter.writeEndDocument();
+
+    fileForWriteCrownCathegory.flush();
+    fileForWriteCrownCathegory.close();
+}
+
+bool xml::loadCrownCategory(QVector<Company *> &listCompany)
+{
+    QFile fileForReadCategory(crownCompany);
+
+    if(!fileForReadCategory.open((QIODevice::ReadOnly))){
+        qWarning("file_crown_company not open");
+        return false;
+    }
+
+    QXmlStreamReader xmlReader(&fileForReadCategory);
+
+    if(xmlReader.readNextStartElement()) {
+        if(xmlReader.name() == "CROWN"){
+            while(xmlReader.readNextStartElement()){
+
+                int id;
+                QString nameCompanyFromParser;
+
+                if(xmlReader.name() == "id")
+                    id = xmlReader.readElementText().toInt();
+                if(xmlReader.name() == "name_company")
+                    nameCompanyFromParser = xmlReader.readElementText();
+
+                if(!nameCompanyFromParser.isEmpty())
+                    listCompany.push_back(new Company(id, nameCompanyFromParser));
+            }
+        }
+    }
+}
+
 bool xml::loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefault)
 {
     Q_UNUSED(isDefault);
@@ -124,16 +185,19 @@ bool xml::loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefa
             while(xmlReader.readNextStartElement()){
                 if(xmlReader.name() == "item"){
                     QString nameCompany, address;
+                    int id = 0;
                     while(xmlReader.readNextStartElement()){
                         if(xmlReader.name() == "restourant" )
                             nameCompany = xmlReader.readElementText();
                         else if(xmlReader.name() == "address")
                             address = xmlReader.readElementText();
+                        else if(xmlReader.name() == "id")
+                            id = xmlReader.readElementText().toInt();
                         else
                             xmlReader.skipCurrentElement();
                     }
                     if(!nameCompany.isEmpty()){
-                        listCompany.push_back(new Company(nameCompany, address, "00-00", "24-00"));
+                        listCompany.push_back(new Company(id, nameCompany));
                     }
                 }
             }

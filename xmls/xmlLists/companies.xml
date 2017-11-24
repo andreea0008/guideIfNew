@@ -3,18 +3,22 @@
     <channel>
 		<restourants>
 			<item>
+				<id>1</id>
 				<restourant>4 сезони</restourant>
 				<address>в. Урожайна, 5</address>
 			</item>
 			<item>
+				<id>2</id>
 				<restourant>5 сезони</restourant>
 				<address>в. Урожайна, 456</address>
 			</item>
 			<item>
+				<id>3</id>
 				<restourant>6 сезони</restourant>
 				<address>в. Урожайна, 464</address>
 			</item>
 			<item>
+				<id>4</id>
 				<restourant>7 сезони</restourant>
 				<address>в. Урожайна, 46456</address>
 			</item>
@@ -22,18 +26,22 @@
 		</restourants>
 		<boutique>
 			<item>
+				<id>5</id>
 				<restourant>789789 сезони</restourant>
 				<address>в. Урожайна, 5</address>
 			</item>
 			<item>
+				<id>6</id>
 				<restourant>5 се797897зони</restourant>
 				<address>в. Урожайна, 456</address>
 			</item>
 			<item>
+				<id>7</id>
 				<restourant>6 679679</restourant>
 				<address>в. Урожайна, 464</address>
 			</item>
 			<item>
+				<id>8</id>
 				<restourant>7 tltuil</restourant>
 				<address>в. Урожайна, 46456</address>
 			</item>

@@ -74,8 +74,9 @@ Item{
 
             onClick: stackAllCategory.push("qrc:/Delegates/RestDelegate.qml",
                                            {
-                                               "nameCompany":nameCompany,
-                                               "address":addressCompany
+                                               "idCompany" : idCompany,
+                                               "nameCompany": nameCompany,
+                                               "address": addressCompany
                                            })
 
         }

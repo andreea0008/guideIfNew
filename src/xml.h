@@ -10,6 +10,9 @@ public:
     void saveCategory(QVector<MyCategory *> &listCategory, bool isDefault = true);
     bool loadCategory(QVector<MyCategory *> &listCategory, bool isCustom = true);
 
+    void saveCrownCategory(QVector<Company *> &listCompany);
+    bool loadCrownCategory(QVector<Company *> &listCompany);
+
     bool loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefault = true);
 
     bool isExistDefaultFile();
@@ -23,6 +26,7 @@ private:
 
     const QString defaultPathToFile;
     const QString customPathToFile;
+    const QString crownCompany;
 };
 
 #endif // XML_H

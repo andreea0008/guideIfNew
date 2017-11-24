@@ -3,6 +3,7 @@ import QtQuick 2.0
 Item{
     height: 80
     width: parent.width
+    property int idCompany: 0
 
     signal addToCrown(var isCrown)
     signal addToFavorite(var isFavorite)
@@ -60,6 +61,7 @@ Item{
                 onClicked: parent.isSelected ? parent.isSelected = false : parent.isSelected = true
             }
         }
+
         Item{
             id: starItem
             anchors.right: loveItem.left
@@ -92,12 +94,14 @@ Item{
                 }
             }
         }
+
         Item{
             anchors.right: starItem.left
             anchors.rightMargin: 10
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: parent.height/2
+
 
             Image{
                 id: crownFavorite
@@ -107,8 +111,20 @@ Item{
                 width: height
                 antialiasing: true
 
-                property bool isSelected: false
-                onIsSelectedChanged: addToCrown(isSelected)
+                property bool isSelected: false//CrownCompanies.isCrown(nameRest.text)
+
+                Component.onCompleted: isSelected = CrownCompanies.isCrown(idCompany)
+
+                onVisibleChanged: {
+                    if(visible)
+                        console.log("visible")
+                    else
+                        console.log("invisible")
+                }
+
+                onIsSelectedChanged: {
+                    isSelected ? CrownCompanies.addCompany(idCompany, nameRest.text) : CrownCompanies.deleteCompany(idCompany, nameRest.text)
+                }
 
                 Rectangle{
                     anchors.fill: parent
