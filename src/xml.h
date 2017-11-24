@@ -10,15 +10,19 @@ public:
     void saveCategory(QVector<MyCategory *> &listCategory, bool isDefault = true);
     bool loadCategory(QVector<MyCategory *> &listCategory, bool isCustom = true);
 
-    void saveCrownCategory(QVector<Company *> &listCompany);
-    bool loadCrownCategory(QVector<Company *> &listCompany);
+    void saveFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFavor);
+    bool loadFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFavor);
 
     bool loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefault = true);
 
     bool isExistDefaultFile();
     bool isExistCustomFile();
 
+    QString getPathToFileByTypeFavorite(int type);
+    enum TYPE_FAVORITE{ FAVORITE, LOVE, CROWN } ;
+
 private:
+
     xml();
     xml(xml const&) = delete;
     void operator=(xml const&) = delete;
@@ -26,6 +30,8 @@ private:
 
     const QString defaultPathToFile;
     const QString customPathToFile;
+    const QString loveCompany;
+    const QString favoriteCompany;
     const QString crownCompany;
 };
 

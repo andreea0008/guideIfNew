@@ -10,7 +10,9 @@ xml *xml::instance = 0;
 xml::xml()
     :defaultPathToFile("DefaultListCategory.xml"),
       customPathToFile("CustomListCategory.xml"),
-      crownCompany("CrowmCompany.xml")
+      crownCompany("CrowmCompany.xml"),
+      loveCompany("LoveCompany.xml"),
+      favoriteCompany("FavoriteCompany.xml")
 {
 }
 
@@ -101,9 +103,9 @@ bool xml::loadCategory(QVector<MyCategory *> &listCategory, bool isCustom)
     return false;
 }
 
-void xml::saveCrownCategory(QVector<Company *> &listCompany)
+void xml::saveFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFavor)
 {
-    QFile fileForWriteCrownCathegory(crownCompany);
+    QFile fileForWriteCrownCathegory(getPathToFileByTypeFavorite(typeFavor));
     if(!fileForWriteCrownCathegory.open((QIODevice::WriteOnly))){
         qWarning("file_crown_company not open");
         return;
@@ -112,7 +114,7 @@ void xml::saveCrownCategory(QVector<Company *> &listCompany)
     QXmlStreamWriter xmlWriter(&fileForWriteCrownCathegory);
     xmlWriter.setAutoFormatting(true);
     xmlWriter.writeStartDocument();
-    xmlWriter.writeStartElement("CROWN");
+    xmlWriter.writeStartElement("LIST");
     if(listCompany.count() != 0){
         for(int i = 0; i < listCompany.size(); i++){
             xmlWriter.writeStartElement("crown_id_company" + QString::number(i+1));
@@ -129,9 +131,9 @@ void xml::saveCrownCategory(QVector<Company *> &listCompany)
     fileForWriteCrownCathegory.close();
 }
 
-bool xml::loadCrownCategory(QVector<Company *> &listCompany)
+bool xml::loadFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFavor)
 {
-    QFile fileForReadCategory(crownCompany);
+    QFile fileForReadCategory(getPathToFileByTypeFavorite(typeFavor));
 
     if(!fileForReadCategory.open((QIODevice::ReadOnly))){
         qWarning("file_crown_company not open");
@@ -141,7 +143,7 @@ bool xml::loadCrownCategory(QVector<Company *> &listCompany)
     QXmlStreamReader xmlReader(&fileForReadCategory);
 
     if(xmlReader.readNextStartElement()) {
-        if(xmlReader.name() == "CROWN"){
+        if(xmlReader.name() == "LIST"){
             while(xmlReader.readNextStartElement()){
 
                 int id;
@@ -219,6 +221,22 @@ bool xml::isExistCustomFile()
 {
     QFile defaultFileCategories("CustomListCategory.xml");
     return defaultFileCategories.exists();
+}
+
+QString xml::getPathToFileByTypeFavorite(int type)
+{
+    switch (type) {
+    case TYPE_FAVORITE::LOVE:
+        return loveCompany;
+        break;
+    case TYPE_FAVORITE::FAVORITE:
+        return favoriteCompany;
+        break;
+    case TYPE_FAVORITE::CROWN:
+        return favoriteCompany;
+        break;
+    }
+    return "";
 }
 
 

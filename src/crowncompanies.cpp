@@ -9,7 +9,7 @@ CrownCompanies::CrownCompanies(QObject *parent):
     m_roles[Id] = "idCompany";
     m_roles[NameCompany] = "nameCompany";
 
-    xml::getInstance()->loadCrownCategory(m_dataCompany);
+    xml::getInstance()->loadFavoriteCategoryByType(m_dataCompany, xml::CROWN);
 //    addCompany("CROWN_COMPANY_1");
 //    addCompany("CROWN_COMPANY_2");
 //    addCompany("CROWN_COMPANY_3");
@@ -78,7 +78,7 @@ void CrownCompanies::addCompany(const int idCompany, const QString &nameCompany)
     beginInsertRows(QModelIndex(), m_dataCompany.count(), m_dataCompany.count());
     m_dataCompany << new Company(idCompany, nameCompany);
     endInsertRows();
-    xml::getInstance()->saveCrownCategory(m_dataCompany);
+    xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::CROWN);
 }
 
 void CrownCompanies::deleteCompany(const int idCompany, const QString &nameCompany)
@@ -91,7 +91,7 @@ void CrownCompanies::deleteCompany(const int idCompany, const QString &nameCompa
         }
     }
 
-   xml::getInstance()->saveCrownCategory(m_dataCompany);
+   xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::CROWN);
 }
 
 bool CrownCompanies::isCrown(const int idCompany)
