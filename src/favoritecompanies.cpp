@@ -1,20 +1,12 @@
 #include "favoritecompanies.h"
-
+#include "xml.h"
 FavoriteCompanies::FavoriteCompanies(QObject *parent)
     :QAbstractItemModel(parent)
 {
+    m_roles[Id] = "idCompany";
     m_roles[NameCompany] = "nameCompany";
-    addCompany("FAVORITE_COMPANY_1");
-    addCompany("FAVORITE_COMPANY_2");
-    addCompany("FAVORITE_COMPANY_3");
-    addCompany("FAVORITE_COMPANY_4");
-    addCompany("FAVORITE_COMPANY_5");
-    addCompany("FAVORITE_COMPANY_6");
-    addCompany("FAVORITE_COMPANY_7");
-    addCompany("FAVORITE_COMPANY_8");
-    addCompany("FAVORITE_COMPANY_9");
-    addCompany("FAVORITE_COMPANY_10");
-    addCompany("FAVORITE_COMPANY_11");
+    xml::getInstance()->loadFavoriteCategoryByType(m_dataCompany, xml::FAVORITE);
+
 }
 
 FavoriteCompanies::~FavoriteCompanies()
@@ -49,8 +41,8 @@ QVariant FavoriteCompanies::data(const QModelIndex &index, int role) const
 
     Company *currentCompany = m_dataCompany[index.row()];
     switch (role) {
-    case NameCompany:
-        return currentCompany->getNameCompany();
+    case Id: return currentCompany->getIdCompany();
+    case NameCompany: return currentCompany->getNameCompany();
     default:
         return QVariant();
     }
@@ -66,10 +58,35 @@ QHash<int, QByteArray> FavoriteCompanies::roleNames() const
     return m_roles;
 }
 
-void FavoriteCompanies::addCompany(const QString &nameCompany)
+void FavoriteCompanies::addCompany(const int idCompany, const QString &nameCompany)
 {
+    if(isFavorite(idCompany))
+        return;
     beginInsertRows(QModelIndex(), m_dataCompany.count(), m_dataCompany.count());
-    m_dataCompany << new Company(nameCompany);
+    m_dataCompany << new Company(idCompany, nameCompany);
     endInsertRows();
+    xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::FAVORITE);
+}
+
+void FavoriteCompanies::deleteCompany(const int idCompany)
+{
+    for(int i = 0; i < m_dataCompany.size(); i++){
+        if(m_dataCompany[i]->getIdCompany() == idCompany){
+            beginRemoveRows(QModelIndex(), i, i);
+            m_dataCompany.removeAt(i);
+            endRemoveRows();
+        }
+    }
+
+    xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::FAVORITE);
+}
+
+bool FavoriteCompanies::isFavorite(const int idCompany)
+{
+    for(int i = 0; i < m_dataCompany.size(); i++){
+        if(m_dataCompany[i]->getIdCompany() == idCompany)
+            return true;
+    }
+    return false;
 }
 

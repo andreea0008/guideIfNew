@@ -21,10 +21,11 @@ public:
     QModelIndex index(int row, int column, const QModelIndex &parent) const override;
     QHash<int, QByteArray> roleNames() const override;
 
-    Q_INVOKABLE void addCompany(const QString &nameCompany);
-
+    Q_INVOKABLE void addCompany(const int idCompany, const QString &nameCompany);
+    Q_INVOKABLE void deleteCompany(const int idCompany);
+    Q_INVOKABLE bool isFavorite(const int idCompany);
 private:
-    enum CompanyRoles{ NameCompany };
+    enum CompanyRoles{ Id, NameCompany };
     QHash<int, QByteArray> m_roles;
     QVector<Company *> m_dataCompany;
 };

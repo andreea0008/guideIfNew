@@ -81,7 +81,7 @@ void CrownCompanies::addCompany(const int idCompany, const QString &nameCompany)
     xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::CROWN);
 }
 
-void CrownCompanies::deleteCompany(const int idCompany, const QString &nameCompany)
+void CrownCompanies::deleteCompany(const int idCompany)
 {
     for(int i = 0; i < m_dataCompany.size(); i++){
         if(m_dataCompany[i]->getIdCompany() == idCompany){

@@ -21,7 +21,7 @@ public:
     QModelIndex index(int row, int column, const QModelIndex &parent) const override;
     QHash<int, QByteArray> roleNames() const override;
     Q_INVOKABLE void addCompany(const int idCompany, const QString &nameCompany);
-    Q_INVOKABLE void deleteCompany(const int idCompany, const QString &nameCompany);
+    Q_INVOKABLE void deleteCompany(const int idCompany);
     Q_INVOKABLE bool isCrown(const int idCompany);
 
 private:

@@ -45,9 +45,15 @@ Item{
             width: height
             antialiasing: true
 
+            Component.onCompleted: isSelected = LoveCompanies.isLove(idCompany)
+
             property bool isSelected: false
 
-            onIsSelectedChanged: addToLove(isSelected)
+            onIsSelectedChanged:
+                isSelected ? LoveCompanies.addCompany(idCompany, nameRest.text) : LoveCompanies.deleteCompany(idCompany)
+
+
+
 
             Rectangle{
                 anchors.fill: parent
@@ -78,8 +84,12 @@ Item{
                 width: height
                 antialiasing: true
 
+                Component.onCompleted: isSelected = FavoriteCompanies.isFavorite(idCompany)
+
                 property bool isSelected: false
-                onIsSelectedChanged: addToFavorite(isSelected)
+                onIsSelectedChanged:
+                    isSelected ? FavoriteCompanies.addCompany(idCompany, nameRest.text) : FavoriteCompanies.deleteCompany(idCompany)
+
 
                 Rectangle{
                     anchors.fill: parent
@@ -123,7 +133,7 @@ Item{
                 }
 
                 onIsSelectedChanged: {
-                    isSelected ? CrownCompanies.addCompany(idCompany, nameRest.text) : CrownCompanies.deleteCompany(idCompany, nameRest.text)
+                    isSelected ? CrownCompanies.addCompany(idCompany, nameRest.text) : CrownCompanies.deleteCompany(idCompany)
                 }
 
                 Rectangle{

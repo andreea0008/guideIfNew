@@ -80,6 +80,12 @@ StackView{
 
             }
         }
+        Text{
+            anchors.centerIn: parent
+            visible:  list.count === 0
+            text: qsTr("Немає обраних")
+            color: "white"
+        }
     }
 
     function releaseStack(){

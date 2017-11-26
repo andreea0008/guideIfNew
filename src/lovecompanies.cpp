@@ -1,14 +1,13 @@
 #include "lovecompanies.h"
 #include <QAbstractItemModel>
+#include "xml.h"
+
 Lovecompanies::Lovecompanies(QObject *parent) : QAbstractItemModel(parent)
 {
+    m_roles[Id] = "idCompany";
     m_roles[NameCompany] = "nameCompany";
-    addCompany("Love_companies_1");
-    addCompany("Love_companies_2");
-    addCompany("Love_companies_3");
-    addCompany("Love_companies_4");
-    addCompany("Love_companies_5");
-    addCompany("Love_companies_6");
+    xml::getInstance()->loadFavoriteCategoryByType(m_dataCompany, xml::LOVE);
+
 }
 
 Lovecompanies::~Lovecompanies()
@@ -43,8 +42,8 @@ QVariant Lovecompanies::data(const QModelIndex &index, int role) const
 
     Company *currentCompany = m_dataCompany[index.row()];
     switch (role) {
-    case NameCompany:
-        return currentCompany->getNameCompany();
+    case Id: return currentCompany->getIdCompany();
+    case NameCompany: return currentCompany->getNameCompany();
     default:
         return QVariant();
     }
@@ -60,9 +59,34 @@ QHash<int, QByteArray> Lovecompanies::roleNames() const
     return m_roles;
 }
 
-void Lovecompanies::addCompany(const QString &nameCompany)
+void Lovecompanies::addCompany(const int idCompany, const QString &nameCompany)
 {
+    if(isLove(idCompany))
+        return;
     beginInsertRows(QModelIndex(), m_dataCompany.count(), m_dataCompany.count());
-    m_dataCompany << new Company(nameCompany);
+    m_dataCompany << new Company(idCompany, nameCompany);
     endInsertRows();
+    xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::LOVE);
+}
+
+void Lovecompanies::deleteCompany(const int idCompany)
+{
+    for(int i = 0; i < m_dataCompany.size(); i++){
+        if(m_dataCompany[i]->getIdCompany() == idCompany){
+            beginRemoveRows(QModelIndex(), i, i);
+            m_dataCompany.removeAt(i);
+            endRemoveRows();
+        }
+    }
+
+   xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::LOVE);
+}
+
+bool Lovecompanies::isLove(const int idCompany)
+{
+    for(int i = 0; i < m_dataCompany.size(); i++){
+        if(m_dataCompany[i]->getIdCompany() == idCompany)
+            return true;
+    }
+    return false;
 }
