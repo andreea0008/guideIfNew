@@ -9,8 +9,8 @@
 Category::Category(QObject *parent) : QAbstractItemModel(parent),
     isMoved(false)
 {
-    m_roles[NameRole] = "categoryName";
     m_roles[Id] = "categoryId";
+    m_roles[NameRole] = "categoryName";
     m_roles[PathToFile] = "pathToFileCategory";
     m_roles[UrlFile] = "urlCategory";
     m_roles[Tag] = "tag";
@@ -95,12 +95,14 @@ void Category::deleteElement(int index)
 void Category::move(int from, int to)
 {
     if(from > to){
-        if(!beginMoveRows(QModelIndex(), from, from, QModelIndex(), to))
-            return;
+        beginMoveRows(QModelIndex(), from, from, QModelIndex(), to);
+        m_data.insert(to, m_data[from]);
+        m_data.removeAt(from +1);
         endMoveRows();
     }else{
-        if(!beginMoveRows(QModelIndex(), from, from, QModelIndex(), to+1))
-            return;
+        beginMoveRows(QModelIndex(), from, from, QModelIndex(), to+1);
+        m_data.insert(to +1, m_data[from]);
+        m_data.removeAt(from);
         endMoveRows();
     }
     isMoved = true;

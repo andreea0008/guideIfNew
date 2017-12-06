@@ -10,17 +10,6 @@ CrownCompanies::CrownCompanies(QObject *parent):
     m_roles[NameCompany] = "nameCompany";
 
     xml::getInstance()->loadFavoriteCategoryByType(m_dataCompany, xml::CROWN);
-//    addCompany("CROWN_COMPANY_1");
-//    addCompany("CROWN_COMPANY_2");
-//    addCompany("CROWN_COMPANY_3");
-//    addCompany("CROWN_COMPANY_4");
-//    addCompany("CROWN_COMPANY_5");
-//    addCompany("CROWN_COMPANY_6");
-//    addCompany("CROWN_COMPANY_7");
-//    addCompany("CROWN_COMPANY_8");
-//    addCompany("CROWN_COMPANY_9");
-//    addCompany("CROWN_COMPANY_10");
-//    addCompany("CROWN_COMPANY_11");
 }
 
 CrownCompanies::~CrownCompanies()
@@ -71,12 +60,12 @@ QHash<int, QByteArray> CrownCompanies::roleNames() const
     return m_roles;
 }
 
-void CrownCompanies::addCompany(const int idCompany, const QString &nameCompany)
+void CrownCompanies::addCompany(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address,  const QString &description)
 {
     if(isCrown(idCompany))
         return;
     beginInsertRows(QModelIndex(), m_dataCompany.count(), m_dataCompany.count());
-    m_dataCompany << new Company(idCompany, nameCompany);
+    m_dataCompany << new Company(idCompany, nameCompany, phones, shedule, address, description);
     endInsertRows();
     xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::CROWN);
 }

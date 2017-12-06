@@ -42,7 +42,6 @@ Item{
             Rectangle{
                 width: parent.width
                 height: delegateItem.height
-//                color: "#2b2b2a"//"#141414"
                 radius: height / 8
 
                 gradient: Gradient{
@@ -72,12 +71,18 @@ Item{
 
             onMoveRectangleRequested: CATEGORY.move(from, to)
 
-            onClick: stackAllCategory.push("qrc:/Delegates/RestDelegate.qml",
+            onClick:{
+                stackAllCategory.push("qrc:/Delegates/RestDelegate.qml",
                                            {
                                                "idCompany" : idCompany,
                                                "nameCompany": nameCompany,
-                                               "address": addressCompany
+                                               "address": addressCompany,
+                                               "listPhones": ListCompanies.listPhones(index),
+                                               "listSchedule": ListCompanies.listSchedule(index),
+                                                "description": description
+
                                            })
+            }
 
         }
     }

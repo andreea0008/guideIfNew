@@ -7,7 +7,7 @@ Lovecompanies::Lovecompanies(QObject *parent) : QAbstractItemModel(parent)
     m_roles[Id] = "idCompany";
     m_roles[NameCompany] = "nameCompany";
     xml::getInstance()->loadFavoriteCategoryByType(m_dataCompany, xml::LOVE);
-
+    qDebug() << "load favorite company" << m_dataCompany.size();
 }
 
 Lovecompanies::~Lovecompanies()
@@ -59,12 +59,12 @@ QHash<int, QByteArray> Lovecompanies::roleNames() const
     return m_roles;
 }
 
-void Lovecompanies::addCompany(const int idCompany, const QString &nameCompany)
+void Lovecompanies::addCompany(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address,  const QString &description)
 {
     if(isLove(idCompany))
         return;
     beginInsertRows(QModelIndex(), m_dataCompany.count(), m_dataCompany.count());
-    m_dataCompany << new Company(idCompany, nameCompany);
+    m_dataCompany << new Company(idCompany, nameCompany, phones, shedule, address, description);
     endInsertRows();
     xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::LOVE);
 }

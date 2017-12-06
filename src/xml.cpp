@@ -117,9 +117,16 @@ void xml::saveFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFa
     xmlWriter.writeStartElement("LIST");
     if(listCompany.count() != 0){
         for(int i = 0; i < listCompany.size(); i++){
-            xmlWriter.writeStartElement("crown_id_company" + QString::number(i+1));
+            xmlWriter.writeStartElement("crown_id_company"/* + QString::number(i+1)*/);
             xmlWriter.writeTextElement("id", QString::number(listCompany[i]->getIdCompany()));
-            xmlWriter.writeTextElement("name_company", listCompany[i]->getNameCompany());
+            xmlWriter.writeTextElement("company", listCompany[i]->getNameCompany());
+            xmlWriter.writeTextElement("address", listCompany[i]->getAddressCompany());
+            foreach (QString tempPhone, listCompany[i]->getPhones())
+                xmlWriter.writeTextElement("phone", tempPhone);
+
+            foreach (QString tempSchedule, listCompany[i]->getSchedule())
+                xmlWriter.writeTextElement("shedule", tempSchedule);
+            xmlWriter.writeTextElement("description", listCompany[i]->getDescription());
 
             xmlWriter.writeEndElement();
         }
@@ -145,17 +152,36 @@ bool xml::loadFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFa
     if(xmlReader.readNextStartElement()) {
         if(xmlReader.name() == "LIST"){
             while(xmlReader.readNextStartElement()){
+                if(xmlReader.name() == "crown_id_company"){
+                    while(xmlReader.readNextStartElement()){
+                        int id;
+                        QString nameCompany, address, description;
+                        QStringList phonesList, scheduleList;
+                        if(xmlReader.name() == "id")
+                            id = xmlReader.readElementText().toInt();
+                        else if(xmlReader.name() == "company"){
+                            nameCompany = xmlReader.readElementText();
+                        }
+                        else if(xmlReader.name() == "address"){
+                            address = xmlReader.readElementText();
+                        }
+                        else if(xmlReader.name() == "phone"){
+                            phonesList.push_back(xmlReader.readElementText());
+                        }
+                        else if(xmlReader.name() == "shedule"){
+                            scheduleList.push_back(xmlReader.readElementText());
+                        }
+                        else if(xmlReader.name() == "description"){
+                            scheduleList.push_back(xmlReader.readElementText());
+                        }
+                        else{
+                            xmlReader.skipCurrentElement();
+                        }
 
-                int id;
-                QString nameCompanyFromParser;
-
-                if(xmlReader.name() == "id")
-                    id = xmlReader.readElementText().toInt();
-                if(xmlReader.name() == "name_company")
-                    nameCompanyFromParser = xmlReader.readElementText();
-
-                if(!nameCompanyFromParser.isEmpty())
-                    listCompany.push_back(new Company(id, nameCompanyFromParser));
+                        if(!nameCompany.isEmpty())
+                            listCompany.push_back(new Company(id, nameCompany, phonesList, scheduleList, address, description));
+                    }
+                }
             }
         }
     }
@@ -165,7 +191,7 @@ bool xml::loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefa
 {
     Q_UNUSED(isDefault);
 
-//    QFile file(":/xmls/xmls/xmlLists/restourants.xml");
+    //    QFile file(":/xmls/xmls/xmlLists/restourants.xml");
     QFile file(":/xmls/xmls/xmlLists/companies.xml");
 
     if(!file.open(QIODevice::ReadOnly)){
@@ -183,23 +209,29 @@ bool xml::loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefa
             continue;
         }
         if(xmlReader.name() == tag){
-            qDebug() << xmlReader.name();
             while(xmlReader.readNextStartElement()){
                 if(xmlReader.name() == "item"){
-                    QString nameCompany, address;
+                    QString nameCompany, address, description;
+                    QStringList phones, daysAndHour;
                     int id = 0;
                     while(xmlReader.readNextStartElement()){
-                        if(xmlReader.name() == "restourant" )
+                        if(xmlReader.name() == "company" )
                             nameCompany = xmlReader.readElementText();
                         else if(xmlReader.name() == "address")
                             address = xmlReader.readElementText();
                         else if(xmlReader.name() == "id")
                             id = xmlReader.readElementText().toInt();
+                        else if(xmlReader.name() == "phone")
+                            phones.push_back(xmlReader.readElementText());
+                        else if(xmlReader.name() == "shedule")
+                            daysAndHour.push_back(xmlReader.readElementText());
+                        else if(xmlReader.name() == "description")
+                            description = xmlReader.readElementText();
                         else
                             xmlReader.skipCurrentElement();
                     }
                     if(!nameCompany.isEmpty()){
-                        listCompany.push_back(new Company(id, nameCompany));
+                        listCompany.push_back(new Company(id, nameCompany, phones, daysAndHour, address, description));
                     }
                 }
             }

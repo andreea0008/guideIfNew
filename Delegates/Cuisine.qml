@@ -11,6 +11,8 @@ Item {
     property int pointSizeText: 10
     property color cText: "#fff"
 
+    property variant schedule
+
     height: getHeight()
 
     Component.onCompleted: {
@@ -47,20 +49,6 @@ Item {
         color: cText
     }
 
-    ListModel{
-        id: model
-
-        ListElement{
-            days: "Mon - Fri:"
-            hours: "08:00 - 23:00"
-        }
-
-        ListElement{
-            days: "Sat - Sun:"
-            hours: "08:00 - 23:00"
-        }
-    }
-
     ListView {
         id: list
         anchors.top: hourLabelToday.bottom
@@ -69,33 +57,24 @@ Item {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.leftMargin: cuisineLabel.width / 2
-        model: model
+        model: schedule
         clip: true
         spacing: 1
         interactive: false
 
-        delegate: Row{
-
-            spacing: 20
+        delegate:
             Text{
-                id: textHoursDelegate
-                text: days
-                font.pointSize: pointSizeText
-                color: cText
-            }
-
-            Text{
-                id: textDaysDelegate
-                text: hours
-                font.pointSize: pointSizeText
-                color: cText
-            }
+            id: textHoursDelegate
+            width: list.width
+            text: modelData
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.pointSize: pointSizeText
+            color: cText
         }
     }
 
     function getHeight() {
         return list.height + cuisineDescription.height + hourLabelToday.height + cuisineLabel.height
     }
-
-
 }

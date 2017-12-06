@@ -88,10 +88,10 @@ StackView{
                 onReleaseButton: isPressed = false
                 onClick: {
                     ListCompanies.setTagGroup(tag)
-                    if(pathToFileCategory !== "path_offline_category")
+                    if(pathToFileCategory !== "path_offline_category"){
                         stackAllCategory.push(Qt.resolvedUrl(pathToFileCategory))
+                    }
                 }
-
             }
         }
     }

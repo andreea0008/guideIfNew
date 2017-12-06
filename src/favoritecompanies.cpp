@@ -58,12 +58,12 @@ QHash<int, QByteArray> FavoriteCompanies::roleNames() const
     return m_roles;
 }
 
-void FavoriteCompanies::addCompany(const int idCompany, const QString &nameCompany)
+void FavoriteCompanies::addCompany(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address,  const QString &description)
 {
     if(isFavorite(idCompany))
         return;
     beginInsertRows(QModelIndex(), m_dataCompany.count(), m_dataCompany.count());
-    m_dataCompany << new Company(idCompany, nameCompany);
+    m_dataCompany << new Company(idCompany, nameCompany, phones, shedule, address, description);
     endInsertRows();
     xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::FAVORITE);
 }

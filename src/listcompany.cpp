@@ -7,14 +7,11 @@ ListCompany::ListCompany(QObject *parent) : QAbstractItemModel(parent)
     m_rolesList[Id] = "idCompany";
     m_rolesList[NameCompany] = "nameCompany";
     m_rolesList[AddressCompany] = "addressCompany";
+    m_rolesList[Phones] = "phonesCompany";
     m_rolesList[HourFrom] = "hourFrom";
     m_rolesList[HourTo] = "hourTo";
     m_rolesList[TypeSpecialization] = "typeSpecialization";
     m_rolesList[Description] = "description";
-
-//    addCompany("Rest_1");
-//    addCompany("Rest_2");
-//    addCompany("Rest_3");
 }
 
 ListCompany::~ListCompany()
@@ -46,6 +43,7 @@ QVariant ListCompany::data(const QModelIndex &index, int role) const
         return QVariant();
 
     Company *currentCompany = m_dataCompany[index.row()];
+    qDebug() <<  index.row();
     switch (role) {
     case Id: return currentCompany->getIdCompany();
     case NameCompany: return currentCompany->getNameCompany();
@@ -107,6 +105,30 @@ void ListCompany::addCompany(const QString &nameCompany)
     beginInsertRows(QModelIndex(), m_dataCompany.count(), m_dataCompany.count());
     m_dataCompany << new Company(nameCompany);
     endInsertRows();
+}
+QList<QVariant> ListCompany::listPhones(int index)
+{
+    QList<QVariant> list;
+
+    if(index < 0 && index > m_dataCompany.size())
+        return list;
+    QStringList stringList = m_dataCompany[index]->getPhones();
+    foreach (QString tempString, stringList) {
+        list.push_back(QVariant::fromValue(tempString));
+    }
+    return list;
+}
+
+QList<QVariant> ListCompany::listSchedule(int index)
+{
+    QList<QVariant> list;
+    if(index < 0 && index > m_dataCompany.size())
+        return list;
+    QStringList stringList = m_dataCompany[index]->getSchedule();
+    foreach (QString tempString, stringList) {
+        list.push_back(QVariant::fromValue(tempString));
+    }
+    return list;
 }
 
 

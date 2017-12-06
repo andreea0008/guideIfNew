@@ -22,13 +22,15 @@ public:
     Q_INVOKABLE void setPathToFileAboutCompany(QString path);
     Q_INVOKABLE void setTagGroup(QString tag);
     Q_INVOKABLE void addCompany(const QString &nameCompany);
-
+    Q_INVOKABLE QList<QVariant> listPhones(int index);
+    Q_INVOKABLE QList<QVariant> listSchedule(int index);
 
 private:
     QString fileAboutCompany;
-    enum ListCompanyRoles{ Id, NameCompany, AddressCompany, HourFrom, HourTo, TypeSpecialization, Description } ;
+    enum ListCompanyRoles{ Id, NameCompany, AddressCompany, Phones, HourFrom, HourTo, TypeSpecialization, Description } ;
     QHash<int, QByteArray> m_rolesList;
     QVector<Company*> m_dataCompany;
+    int selectedIndex;
 };
 
 #endif // LISTCOMPANY_H

@@ -49,11 +49,7 @@ Item{
 
             property bool isSelected: false
 
-            onIsSelectedChanged:
-                isSelected ? LoveCompanies.addCompany(idCompany, nameRest.text) : LoveCompanies.deleteCompany(idCompany)
-
-
-
+            onIsSelectedChanged: addToLove(isSelected)
 
             Rectangle{
                 anchors.fill: parent
@@ -87,8 +83,8 @@ Item{
                 Component.onCompleted: isSelected = FavoriteCompanies.isFavorite(idCompany)
 
                 property bool isSelected: false
-                onIsSelectedChanged:
-                    isSelected ? FavoriteCompanies.addCompany(idCompany, nameRest.text) : FavoriteCompanies.deleteCompany(idCompany)
+                onIsSelectedChanged: addToFavorite(isSelected)
+//                    isSelected ? FavoriteCompanies.addCompany(idCompany, nameRest.text) : FavoriteCompanies.deleteCompany(idCompany)
 
 
                 Rectangle{
@@ -132,9 +128,10 @@ Item{
                         console.log("invisible")
                 }
 
-                onIsSelectedChanged: {
+                onIsSelectedChanged: addToCrown(isSelected)
+                    /*{
                     isSelected ? CrownCompanies.addCompany(idCompany, nameRest.text) : CrownCompanies.deleteCompany(idCompany)
-                }
+                }*/
 
                 Rectangle{
                     anchors.fill: parent

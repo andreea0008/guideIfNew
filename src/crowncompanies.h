@@ -20,7 +20,7 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
     QModelIndex index(int row, int column, const QModelIndex &parent) const override;
     QHash<int, QByteArray> roleNames() const override;
-    Q_INVOKABLE void addCompany(const int idCompany, const QString &nameCompany);
+    Q_INVOKABLE void addCompany(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address, const QString &description);
     Q_INVOKABLE void deleteCompany(const int idCompany);
     Q_INVOKABLE bool isCrown(const int idCompany);
 

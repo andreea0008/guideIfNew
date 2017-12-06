@@ -8,28 +8,16 @@ Item {
     property int widthDelegateRectangle: 200
     property int heightDelegateRectangle: 40
     property color cText: "#fff"
+    property variant phoneList: ["1", "2", "3"]
 
     signal callToNumber(var phone)
-
-    ListModel{
-        id: model
-        ListElement{
-            phone: "+38097.909.9991"
-        }
-        ListElement{
-            phone: "+38097.909.9992"
-        }
-        ListElement{
-            phone: "+38097.909.9993"
-        }
-    }
 
     ListView{
         id: listElement
         anchors.fill: parent
         clip: true
         interactive: false
-        model: model
+        model: phoneList
         spacing: 1
         delegate: Rectangle{
             id: delegateRect
@@ -50,7 +38,7 @@ Item {
 
                 Text {
                     id: phoneText
-                    text: phone
+                    text: modelData
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     anchors.left: parent.left
