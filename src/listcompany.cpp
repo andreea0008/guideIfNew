@@ -12,6 +12,9 @@ ListCompany::ListCompany(QObject *parent) : QAbstractItemModel(parent)
     m_rolesList[HourTo] = "hourTo";
     m_rolesList[TypeSpecialization] = "typeSpecialization";
     m_rolesList[Description] = "description";
+    m_rolesList[Url] = "urlCompany";
+    m_rolesList[Facebook] = "facebookCompany";
+    m_rolesList[Email] = "emailCompany";
 }
 
 ListCompany::~ListCompany()
@@ -43,7 +46,6 @@ QVariant ListCompany::data(const QModelIndex &index, int role) const
         return QVariant();
 
     Company *currentCompany = m_dataCompany[index.row()];
-    qDebug() <<  index.row();
     switch (role) {
     case Id: return currentCompany->getIdCompany();
     case NameCompany: return currentCompany->getNameCompany();
@@ -52,6 +54,9 @@ QVariant ListCompany::data(const QModelIndex &index, int role) const
     case HourTo: return currentCompany->getHourToWork();
     case TypeSpecialization: return currentCompany->getTypeSpecialization();
     case Description: return currentCompany->getDescription();
+    case Url: return currentCompany->getUrl();
+    case Facebook: return currentCompany->getFacebookUrl();
+    case Email: return currentCompany->getEmail();
     default: return QVariant();
     }
     return QVariant();
@@ -70,7 +75,6 @@ QHash<int, QByteArray> ListCompany::roleNames() const
 void ListCompany::setPathToFileAboutCompany(QString path)
 {
     fileAboutCompany = path;
-    qDebug() << path;
 
     for(int i = 0; i< m_dataCompany.size(); i++){
         beginRemoveRows(QModelIndex(), i, i);

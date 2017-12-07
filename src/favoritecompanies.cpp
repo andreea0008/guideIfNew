@@ -5,6 +5,15 @@ FavoriteCompanies::FavoriteCompanies(QObject *parent)
 {
     m_roles[Id] = "idCompany";
     m_roles[NameCompany] = "nameCompany";
+    m_roles[AddressCompany] = "addressCompany";
+    m_roles[Phones] = "phonesCompany";
+    m_roles[HourFrom] = "hourFrom";
+    m_roles[HourTo] = "hourTo";
+    m_roles[TypeSpecialization] = "typeSpecialization";
+    m_roles[Description] = "description";
+    m_roles[Url] = "urlCompany";
+    m_roles[Facebook] = "facebookCompany";
+    m_roles[Email] = "emailCompany";
     xml::getInstance()->loadFavoriteCategoryByType(m_dataCompany, xml::FAVORITE);
 
 }
@@ -43,6 +52,14 @@ QVariant FavoriteCompanies::data(const QModelIndex &index, int role) const
     switch (role) {
     case Id: return currentCompany->getIdCompany();
     case NameCompany: return currentCompany->getNameCompany();
+    case AddressCompany: return currentCompany->getAddressCompany();
+    case HourFrom: return currentCompany->getHourFromWork();
+    case HourTo: return currentCompany->getHourToWork();
+    case TypeSpecialization: return currentCompany->getTypeSpecialization();
+    case Description: return currentCompany->getDescription();
+    case Url: return currentCompany->getUrl();
+    case Facebook: return currentCompany->getFacebookUrl();
+    case Email: return currentCompany->getEmail();
     default:
         return QVariant();
     }

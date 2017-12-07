@@ -25,7 +25,8 @@ public:
     Q_INVOKABLE bool isCrown(const int idCompany);
 
 private:
-    enum CompanyRoles{ Id, NameCompany };
+    enum CompanyRoles{ Id, NameCompany, AddressCompany, Phones, HourFrom, HourTo,
+                       TypeSpecialization, Description, Url, Facebook, Email };
     QHash<int, QByteArray> m_roles;
     QVector<Company *> m_dataCompany;
 };
