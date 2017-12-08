@@ -160,41 +160,38 @@ QVector<Company *> xml::loadFavoriteCategoryByType(int typeFavor)
     QXmlStreamReader xmlReader(&fileForReadCategory);
 
 
-
     if(xmlReader.readNextStartElement()) {
         if(xmlReader.name() == "LIST"){
             while(xmlReader.readNextStartElement()){
                 if(xmlReader.name().contains("crown_id_company")){
+                    int id;
+                    QString nameCompany, address, description;
+                    QStringList phonesList, scheduleList;
                     while(xmlReader.readNextStartElement()){
-                        int id;
-                        QString nameCompany, address, description;
-                        QStringList phonesList, scheduleList;
+
                         if(xmlReader.name() == "id")
                             id = xmlReader.readElementText().toInt();
-                        else if(xmlReader.name() == "company"){
+                        if(xmlReader.name() == "company"){
                             nameCompany = xmlReader.readElementText();
                         }
-                        else if(xmlReader.name() == "address"){
+                        if(xmlReader.name() == "address"){
                             address = xmlReader.readElementText();
-                            qDebug() << address;
                         }
-                        else if(xmlReader.name() == "phone"){
+                        if(xmlReader.name() == "phone"){
                             phonesList.push_back(xmlReader.readElementText());
-                            foreach (QString phone, phonesList) {
-                                qDebug() << phone;
-                            }
                         }
-                        else if(xmlReader.name() == "shedule"){
+                        if(xmlReader.name() == "shedule"){
                             scheduleList.push_back(xmlReader.readElementText());
                         }
-                        else if(xmlReader.name() == "description"){
+                        if(xmlReader.name() == "description"){
                             scheduleList.push_back(xmlReader.readElementText());
                         }
-
-                        if(!nameCompany.isEmpty())
-                            listCompany.push_back(new Company(id, nameCompany, phonesList, scheduleList, address, description));
+                    }
+                    if(!nameCompany.isEmpty()){
+                        listCompany.push_back(new Company(id, nameCompany, phonesList, scheduleList, address, description));
                     }
                 }
+
             }
         }
     }
