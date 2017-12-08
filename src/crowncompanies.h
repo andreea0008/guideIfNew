@@ -1,34 +1,19 @@
 #ifndef CROWNCOMPANIES_H
 #define CROWNCOMPANIES_H
-#include <QAbstractItemModel>
+#include "abstractlistcategory.h"
 #include <QVariant>
 #include "company.h"
 
-
-
-class CrownCompanies : public QAbstractItemModel
+class CrownCompanies : public AbstractListCategory
 {
     Q_OBJECT
 public:
     explicit CrownCompanies(QObject *parent = 0);
     ~CrownCompanies();
 
-    int rowCount(const QModelIndex &parent) const override;
-    int columnCount(const QModelIndex &parent) const override;
-
-    QModelIndex parent(const QModelIndex &child) const override;
-    QVariant data(const QModelIndex &index, int role) const override;
-    QModelIndex index(int row, int column, const QModelIndex &parent) const override;
-    QHash<int, QByteArray> roleNames() const override;
     Q_INVOKABLE void addCompany(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address, const QString &description);
     Q_INVOKABLE void deleteCompany(const int idCompany);
     Q_INVOKABLE bool isCrown(const int idCompany);
-
-private:
-    enum CompanyRoles{ Id, NameCompany, AddressCompany, Phones, HourFrom, HourTo,
-                       TypeSpecialization, Description, Url, Facebook, Email };
-    QHash<int, QByteArray> m_roles;
-    QVector<Company *> m_dataCompany;
 };
 
 #endif // CROWNCOMPANIES_H

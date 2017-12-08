@@ -111,21 +111,30 @@ void xml::saveFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFa
         return;
     }
 
+    qDebug() << __FUNCTION__ << " size: " << listCompany.size();
+    for( int i = 0; i < listCompany.size(); i++) {
+        qDebug() << __FUNCTION__ << i << listCompany[i]->getAddressCompany();
+        qDebug() << __FUNCTION__ << i << listCompany[i]->getPhones();
+    }
+
     QXmlStreamWriter xmlWriter(&fileForWriteCrownCathegory);
     xmlWriter.setAutoFormatting(true);
     xmlWriter.writeStartDocument();
     xmlWriter.writeStartElement("LIST");
     if(listCompany.count() != 0){
         for(int i = 0; i < listCompany.size(); i++){
-            xmlWriter.writeStartElement("crown_id_company"/* + QString::number(i+1)*/);
+            xmlWriter.writeStartElement("crown_id_company" + QString::number(i+1));
             xmlWriter.writeTextElement("id", QString::number(listCompany[i]->getIdCompany()));
             xmlWriter.writeTextElement("company", listCompany[i]->getNameCompany());
             xmlWriter.writeTextElement("address", listCompany[i]->getAddressCompany());
-            foreach (QString tempPhone, listCompany[i]->getPhones())
-                xmlWriter.writeTextElement("phone", tempPhone);
+
+            QStringList phones = listCompany[i]->getPhones();
+            for (int i = 0; i < phones.size(); i++)
+                xmlWriter.writeTextElement("phone", phones.at(i));
 
             foreach (QString tempSchedule, listCompany[i]->getSchedule())
                 xmlWriter.writeTextElement("shedule", tempSchedule);
+
             xmlWriter.writeTextElement("description", listCompany[i]->getDescription());
 
             xmlWriter.writeEndElement();
@@ -138,21 +147,24 @@ void xml::saveFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFa
     fileForWriteCrownCathegory.close();
 }
 
-bool xml::loadFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFavor)
+QVector<Company *> xml::loadFavoriteCategoryByType(int typeFavor)
 {
+    QVector<Company *> listCompany;
     QFile fileForReadCategory(getPathToFileByTypeFavorite(typeFavor));
 
     if(!fileForReadCategory.open((QIODevice::ReadOnly))){
         qWarning("file_crown_company not open");
-        return false;
+        return listCompany;
     }
 
     QXmlStreamReader xmlReader(&fileForReadCategory);
 
+
+
     if(xmlReader.readNextStartElement()) {
         if(xmlReader.name() == "LIST"){
             while(xmlReader.readNextStartElement()){
-                if(xmlReader.name() == "crown_id_company"){
+                if(xmlReader.name().contains("crown_id_company")){
                     while(xmlReader.readNextStartElement()){
                         int id;
                         QString nameCompany, address, description;
@@ -164,18 +176,19 @@ bool xml::loadFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFa
                         }
                         else if(xmlReader.name() == "address"){
                             address = xmlReader.readElementText();
+                            qDebug() << address;
                         }
                         else if(xmlReader.name() == "phone"){
                             phonesList.push_back(xmlReader.readElementText());
+                            foreach (QString phone, phonesList) {
+                                qDebug() << phone;
+                            }
                         }
                         else if(xmlReader.name() == "shedule"){
                             scheduleList.push_back(xmlReader.readElementText());
                         }
                         else if(xmlReader.name() == "description"){
                             scheduleList.push_back(xmlReader.readElementText());
-                        }
-                        else{
-                            xmlReader.skipCurrentElement();
                         }
 
                         if(!nameCompany.isEmpty())
@@ -185,6 +198,8 @@ bool xml::loadFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFa
             }
         }
     }
+
+    return listCompany;
 }
 
 bool xml::loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefault)
@@ -194,10 +209,11 @@ bool xml::loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefa
     //    QFile file(":/xmls/xmls/xmlLists/restourants.xml");
     QFile file(":/xmls/xmls/xmlLists/companies.xml");
 
-    if(!file.open(QIODevice::ReadOnly)){
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text | QFile::Truncate)){
         qWarning("f_not_open");
         return false;
     }
+
     QXmlStreamReader xmlReader(&file);
 
     listCompany.clear();
@@ -265,7 +281,7 @@ QString xml::getPathToFileByTypeFavorite(int type)
         return favoriteCompany;
         break;
     case TYPE_FAVORITE::CROWN:
-        return favoriteCompany;
+        return crownCompany;
         break;
     }
     return "";

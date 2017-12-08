@@ -11,7 +11,7 @@ public:
     bool loadCategory(QVector<MyCategory *> &listCategory, bool isCustom = true);
 
     void saveFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFavor);
-    bool loadFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFavor);
+    QVector<Company *> loadFavoriteCategoryByType(int typeFavor);
 
     bool loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefault = true);
 

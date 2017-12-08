@@ -17,7 +17,7 @@ StackView{
 
     onVisibleChanged: {
         if(!visible)
-            releaseStack()
+            releaseStack()        
     }
 
     focus: true
