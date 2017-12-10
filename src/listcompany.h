@@ -1,23 +1,15 @@
 #ifndef LISTCOMPANY_H
 #define LISTCOMPANY_H
-#include <QAbstractItemModel>
 #include "company.h"
+#include "abstractlistcategory.h"
 
 
-class ListCompany : public QAbstractItemModel
+class ListCompany : public AbstractListCategory
 {
     Q_OBJECT
 public:
     explicit ListCompany(QObject *parent = 0);
     ~ListCompany();
-
-    int rowCount(const QModelIndex &parent) const override;
-    int columnCount(const QModelIndex &parent) const override;
-
-    QModelIndex parent(const QModelIndex &child) const override;
-    QVariant data(const QModelIndex &index, int role) const override;
-    QModelIndex index(int row, int column, const QModelIndex &parent) const override;
-    QHash<int, QByteArray> roleNames() const;
 
     Q_INVOKABLE void setPathToFileAboutCompany(QString path);
     Q_INVOKABLE void setTagGroup(QString tag);
@@ -27,10 +19,6 @@ public:
 
 private:
     QString fileAboutCompany;
-    enum ListCompanyRoles{ Id, NameCompany, AddressCompany, Phones, HourFrom, HourTo,
-                           TypeSpecialization, Description, Url, Facebook, Email } ;
-    QHash<int, QByteArray> m_rolesList;
-    QVector<Company*> m_dataCompany;
     int selectedIndex;
 };
 

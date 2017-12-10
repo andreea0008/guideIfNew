@@ -73,12 +73,20 @@ QHash<int, QByteArray> AbstractListCategory::roleNames() const
     return m_roles;
 }
 
+void AbstractListCategory::addCompanyToList(QString nameCompany)
+{
+    beginInsertRows(QModelIndex(), m_dataCompany.size(), m_dataCompany.size());
+    m_dataCompany << new Company(nameCompany);
+    endInsertRows();
+}
+
 void AbstractListCategory::addCompanyToList(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address, const QString &description)
 {
     beginInsertRows(QModelIndex(), m_dataCompany.size(), m_dataCompany.size());
-    m_dataCompany << new Company(idCompany, nameCompany, phones, shedule, address, description);
+    m_dataCompany.push_front(new Company(idCompany, nameCompany, phones, shedule, address, description));
     endInsertRows();
 }
+
 
 void AbstractListCategory::deleteCompanyFromList(const int idCompany)
 {

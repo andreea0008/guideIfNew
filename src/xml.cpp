@@ -111,11 +111,6 @@ void xml::saveFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFa
         return;
     }
 
-    qDebug() << __FUNCTION__ << " size: " << listCompany.size();
-    for( int i = 0; i < listCompany.size(); i++) {
-        qDebug() << __FUNCTION__ << i << listCompany[i]->getAddressCompany();
-        qDebug() << __FUNCTION__ << i << listCompany[i]->getPhones();
-    }
 
     QXmlStreamWriter xmlWriter(&fileForWriteCrownCathegory);
     xmlWriter.setAutoFormatting(true);

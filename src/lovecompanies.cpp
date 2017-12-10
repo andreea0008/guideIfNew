@@ -12,7 +12,9 @@ Lovecompanies::~Lovecompanies()
 
 }
 
-void Lovecompanies::addCompany(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address,  const QString &description)
+void Lovecompanies::addCompany(const int idCompany, const QString &nameCompany,
+                               const QStringList &phones, const QStringList &shedule,
+                               const QString &address,  const QString &description)
 {
     if(isLove(idCompany))
         return;
@@ -23,7 +25,7 @@ void Lovecompanies::addCompany(const int idCompany, const QString &nameCompany, 
 void Lovecompanies::deleteCompany(const int idCompany)
 {
     deleteCompanyFromList(idCompany);
-   xml::getInstance()->saveFavoriteCategoryByType(dataCompany(), xml::LOVE);
+   xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::LOVE);
 }
 
 bool Lovecompanies::isLove(const int idCompany)

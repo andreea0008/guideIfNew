@@ -38,18 +38,28 @@ Item{
         width: height/2
 
         Image{
-            id: loveFavorite
+            id: crownFavorite
             anchors.centerIn: parent
-            source: "../Delegates/img/favourite-star_not_selected.png"
+            source: "../Delegates/img/crown.png"
             height: parent.height/2
             width: height
             antialiasing: true
 
-            Component.onCompleted: isSelected = LoveCompanies.isLove(idCompany)
+            property bool isSelected: false//CrownCompanies.isCrown(nameRest.text)
 
-            property bool isSelected: false
+            Component.onCompleted: isSelected = CrownCompanies.isCrown(idCompany)
 
-            onIsSelectedChanged: addToLove(isSelected)
+            onVisibleChanged: {
+                if(visible)
+                    console.log("visible")
+                else
+                    console.log("invisible")
+            }
+
+            onIsSelectedChanged: addToCrown(isSelected)
+                /*{
+                isSelected ? CrownCompanies.addCompany(idCompany, nameRest.text) : CrownCompanies.deleteCompany(idCompany)
+            }*/
 
             Rectangle{
                 anchors.fill: parent
@@ -63,6 +73,8 @@ Item{
                 onClicked: parent.isSelected ? parent.isSelected = false : parent.isSelected = true
             }
         }
+
+
 
         Item{
             id: starItem
@@ -108,30 +120,19 @@ Item{
             anchors.bottom: parent.bottom
             width: parent.height/2
 
-
             Image{
-                id: crownFavorite
+                id: loveFavorite
                 anchors.centerIn: parent
-                source: "../Delegates/img/crown.png"
+                source: "../Delegates/img/favourite-star_not_selected.png"
                 height: parent.height/2
                 width: height
                 antialiasing: true
 
-                property bool isSelected: false//CrownCompanies.isCrown(nameRest.text)
+                Component.onCompleted: isSelected = LoveCompanies.isLove(idCompany)
 
-                Component.onCompleted: isSelected = CrownCompanies.isCrown(idCompany)
+                property bool isSelected: false
 
-                onVisibleChanged: {
-                    if(visible)
-                        console.log("visible")
-                    else
-                        console.log("invisible")
-                }
-
-                onIsSelectedChanged: addToCrown(isSelected)
-                    /*{
-                    isSelected ? CrownCompanies.addCompany(idCompany, nameRest.text) : CrownCompanies.deleteCompany(idCompany)
-                }*/
+                onIsSelectedChanged: addToLove(isSelected)
 
                 Rectangle{
                     anchors.fill: parent

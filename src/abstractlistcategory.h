@@ -18,6 +18,7 @@ public:
     virtual QVariant data(const QModelIndex &index, int role) const override;
     virtual QModelIndex index(int row, int column, const QModelIndex &parent) const override;
     virtual QHash<int, QByteArray> roleNames() const override;
+    virtual void addCompanyToList(QString nameCompany);
     virtual void addCompanyToList(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address,  const QString &description);
     virtual void deleteCompanyFromList(const int idCompany);
     virtual bool isCurrentFavorite(const int idCompany);
