@@ -22,6 +22,7 @@ public:
     virtual void addCompanyToList(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address,  const QString &description);
     virtual void deleteCompanyFromList(const int idCompany);
     virtual bool isCurrentFavorite(const int idCompany);
+    void updateRowData();
 
     QVector<Company *> dataCompany() const;
     void setDataCompany(const QVector<Company *> &dataCompany);

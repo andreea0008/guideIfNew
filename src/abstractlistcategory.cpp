@@ -84,6 +84,7 @@ void AbstractListCategory::addCompanyToList(const int idCompany, const QString &
 {
     beginInsertRows(QModelIndex(), m_dataCompany.size(), m_dataCompany.size());
     m_dataCompany.push_front(new Company(idCompany, nameCompany, phones, shedule, address, description));
+    updateRowData();
     endInsertRows();
 }
 
@@ -106,6 +107,14 @@ bool AbstractListCategory::isCurrentFavorite(const int idCompany)
             return true;
     }
     return false;
+}
+
+void AbstractListCategory::updateRowData()
+{
+    for (int i = 0; i < m_dataCompany.size(); i++){
+        QModelIndex index = createIndex(i, 0);
+        dataChanged(index, index);
+    }
 }
 
 QVector<Company *> AbstractListCategory::dataCompany() const

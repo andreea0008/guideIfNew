@@ -34,10 +34,15 @@ Item{
         anchors.leftMargin: height / 2
         anchors.verticalCenter: parent.verticalCenter
         source: "qrc:/Delegates/img/left-arrow.png"
-        visible: stackAllCategory.depth > 1
+        visible: (stackAllCategory.depth > 1) || (stackFavoriteCategory.depth > 1) || (stackLoverCategory.depth > 1) || (stackCrownCategory.depth > 1)
         MouseArea{
             anchors.fill: parent
-            onReleased: stackAllCategory.pop()
+            onReleased: {
+                if(stackAllCategory.visible) stackAllCategory.pop()
+                if(stackLoverCategory.visible) stackLoverCategory.pop
+                if(stackFavoriteCategory.visible) stackFavoriteCategory.pop()
+                if(stackCrownCategory.visible) stackCrownCategory.pop()
+            }
         }
     }
 

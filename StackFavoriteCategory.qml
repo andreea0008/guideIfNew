@@ -77,7 +77,17 @@ StackView{
 
 //                onMoveRectangleRequested: LoveCompanies.move(from, to)
 
-//                onClick: stackAllCategory.push(pathToFileCategory)
+                onClick: {
+                    stackFavoriteCategory.push("qrc:/Delegates/RestDelegate.qml",
+                                               {
+                                                   "idCompany" : idCompany,
+                                                   "nameCompany": nameCompany,
+                                                   "address": addressCompany,
+//                                                   "listPhones": FavoriteCompanies.listPhones(index),
+//                                                   "listSchedule": FavoriteCompanies.listSchedule(index),
+                                                    "description": description
+                                               })
+                }
 
             }
         }

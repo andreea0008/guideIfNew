@@ -132,6 +132,7 @@ Window {
                 stackAllCategory.pop()
                 stackLoverCategory.pop
                 stackFavoriteCategory.pop()
+                stackCrownCategory.pop()
             }
         }
 
