@@ -27,6 +27,9 @@ public:
     QVector<Company *> dataCompany() const;
     void setDataCompany(const QVector<Company *> &dataCompany);
 
+    QList<QVariant> getListPhones(int index);
+    QList<QVariant>getListWorHour(int index);
+
 protected:
     QHash<int, QByteArray> m_roles;
     QVector<Company *> m_dataCompany;

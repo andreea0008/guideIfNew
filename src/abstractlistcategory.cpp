@@ -126,3 +126,28 @@ void AbstractListCategory::setDataCompany(const QVector<Company *> &dataCompany)
 {
     m_dataCompany = dataCompany;
 }
+
+QList<QVariant> AbstractListCategory::getListPhones(int index)
+{
+    QList<QVariant> list;
+
+    if(index < 0 && index > m_dataCompany.size())
+        return list;
+    QStringList stringList = m_dataCompany[index]->getPhones();
+    foreach (QString tempString, stringList) {
+        list.push_back(QVariant::fromValue(tempString));
+    }
+    return list;
+}
+
+QList<QVariant> AbstractListCategory::getListWorHour(int index)
+{
+    QList<QVariant> list;
+    if(index < 0 && index > dataCompany().size())
+        return list;
+    QStringList stringList = dataCompany()[index]->getSchedule();
+    foreach (QString tempString, stringList) {
+        list.push_back(QVariant::fromValue(tempString));
+    }
+    return list;
+}

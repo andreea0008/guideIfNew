@@ -32,3 +32,13 @@ bool Lovecompanies::isLove(const int idCompany)
 {
     return isCurrentFavorite(idCompany);
 }
+
+QList<QVariant> Lovecompanies::listPhones(int index)
+{
+    return getListPhones(index);
+}
+
+QList<QVariant> Lovecompanies::listSchedule(int index)
+{
+    return getListWorHour(index);
+}

@@ -17,7 +17,7 @@ StackView{
 
     onVisibleChanged: {
         if(!visible)
-            releaseStack()        
+            releaseStack()
     }
 
     focus: true
@@ -75,9 +75,19 @@ StackView{
 
                 draggedItemParent: list
 
-//                onMoveRectangleRequested: LoveCompanies.move(from, to)
+                //                onMoveRectangleRequested: LoveCompanies.move(from, to)
 
-//                onClick: stackAllCategory.push(pathToFileCategory)
+                onClick: {
+                    stackCrownCategory.push("qrc:/Delegates/RestDelegate.qml",
+                                            {
+                                                "idCompany" : idCompany,
+                                                "nameCompany": nameCompany,
+                                                "address": addressCompany,
+                                                "listPhones": CrownCompanies.listPhones(index),
+                                                "listSchedule": CrownCompanies.listSchedule(index),
+                                                "description": description
+                                            })
+                }
 
             }
         }

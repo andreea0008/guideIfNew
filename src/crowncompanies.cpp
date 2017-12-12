@@ -30,7 +30,17 @@ void CrownCompanies::deleteCompany(const int idCompany)
 
 bool CrownCompanies::isCrown(const int idCompany)
 {
-   return isCurrentFavorite(idCompany);
+    return isCurrentFavorite(idCompany);
+}
+
+QList<QVariant> CrownCompanies::listPhones(int index)
+{
+    return getListPhones(index);
+}
+
+QList<QVariant> CrownCompanies::listSchedule(int index)
+{
+    return getListWorHour(index);
 }
 
 

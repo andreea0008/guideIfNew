@@ -83,14 +83,15 @@ StackView{
                                                    "idCompany" : idCompany,
                                                    "nameCompany": nameCompany,
                                                    "address": addressCompany,
-//                                                   "listPhones": FavoriteCompanies.listPhones(index),
-//                                                   "listSchedule": FavoriteCompanies.listSchedule(index),
+                                                   "listPhones": FavoriteCompanies.listPhones(index),
+                                                   "listSchedule": FavoriteCompanies.listSchedule(index),
                                                     "description": description
                                                })
                 }
+                }
 
             }
-        }
+
 
         Text{
             anchors.centerIn: parent

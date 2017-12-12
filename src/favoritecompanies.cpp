@@ -1,5 +1,6 @@
 #include "favoritecompanies.h"
 #include "xml.h"
+#include <QDebug>
 FavoriteCompanies::FavoriteCompanies(QObject *parent)
     :AbstractListCategory(parent)
 {
@@ -28,5 +29,15 @@ void FavoriteCompanies::deleteCompany(const int idCompany)
 bool FavoriteCompanies::isFavorite(const int idCompany)
 {
     return isCurrentFavorite(idCompany);
+}
+
+QList<QVariant> FavoriteCompanies::listPhones(int index)
+{
+    return getListPhones(index);
+}
+
+QList<QVariant> FavoriteCompanies::listSchedule(int index)
+{
+    return getListWorHour(index);
 }
 

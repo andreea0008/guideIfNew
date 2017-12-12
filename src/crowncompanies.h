@@ -14,6 +14,8 @@ public:
     Q_INVOKABLE void addCompany(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address, const QString &description);
     Q_INVOKABLE void deleteCompany(const int idCompany);
     Q_INVOKABLE bool isCrown(const int idCompany);
+    Q_INVOKABLE QList<QVariant> listPhones(int index);
+    Q_INVOKABLE QList<QVariant> listSchedule(int index);
 };
 
 #endif // CROWNCOMPANIES_H

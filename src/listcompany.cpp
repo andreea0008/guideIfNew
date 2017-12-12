@@ -45,27 +45,12 @@ void ListCompany::addCompany(const QString &nameCompany)
 }
 QList<QVariant> ListCompany::listPhones(int index)
 {
-    QList<QVariant> list;
-
-    if(index < 0 && index > m_dataCompany.size())
-        return list;
-    QStringList stringList = m_dataCompany[index]->getPhones();
-    foreach (QString tempString, stringList) {
-        list.push_back(QVariant::fromValue(tempString));
-    }
-    return list;
+    return getListWorHour(index);
 }
 
 QList<QVariant> ListCompany::listSchedule(int index)
 {
-    QList<QVariant> list;
-    if(index < 0 && index > dataCompany().size())
-        return list;
-    QStringList stringList = dataCompany()[index]->getSchedule();
-    foreach (QString tempString, stringList) {
-        list.push_back(QVariant::fromValue(tempString));
-    }
-    return list;
+    return getListWorHour(index);
 }
 
 
