@@ -6,6 +6,7 @@
 #include "src/favoritecompanies.h"
 #include "src/crowncompanies.h"
 #include "src/listcompany.h"
+#include "src/reportselectedcompanies.h"
 #include <QQmlContext>
 
 
@@ -23,6 +24,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("CrownCompanies", new CrownCompanies(&engine));
     engine.rootContext()->setContextProperty("ListCompanies", new ListCompany(&engine));
     engine.rootContext()->setContextProperty("Settings", new Settings(&engine));
+    engine.rootContext()->setContextProperty("ReportSelectedCompany", new ReportSelectedCompanies());
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();

@@ -16,6 +16,7 @@ public:
     Q_INVOKABLE bool isCrown(const int idCompany);
     Q_INVOKABLE QList<QVariant> listPhones(int index);
     Q_INVOKABLE QList<QVariant> listSchedule(int index);
+    Q_INVOKABLE QList<QVariant> listCompanyForReport();
 };
 
 #endif // CROWNCOMPANIES_H

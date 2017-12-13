@@ -16,7 +16,6 @@ public:
     Q_INVOKABLE void addCompany(const QString &nameCompany);
     Q_INVOKABLE QList<QVariant> listPhones(int index);
     Q_INVOKABLE QList<QVariant> listSchedule(int index);
-
 private:
     QString fileAboutCompany;
     int selectedIndex;

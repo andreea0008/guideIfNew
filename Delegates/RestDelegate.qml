@@ -18,10 +18,6 @@ ScrollView{
 
     Rectangle {
         id: mainItem
-//        property alias nameRestText: head.nameRestourant
-//        property alias addressLabelText: address.addressLabelText
-//        property alias address: address.addressText
-//        property alias descriptionText: description.text
         width: scrollView.width
         height: getHeightColumn()
 
@@ -93,6 +89,7 @@ ScrollView{
             Text{
                 id: description
                 width: parent.width
+                visible: text.length > 0
                 text:
                     "Offering many of the city’s best restaurants and shops set amid classic New York architecture, the Flatiron
                     District is no longer under the tourist radar. At 23rd Street is the famous triangular Flatiron Building,
@@ -104,7 +101,7 @@ ScrollView{
                     the lower part of the Flatiron District you'll find Union Square, a bustling crossroads at all times of
                     day and night"
                 wrapMode: Text.Wrap
-                color: "#fff"
+                color: "white"
             }
         }
 

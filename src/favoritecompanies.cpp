@@ -41,3 +41,8 @@ QList<QVariant> FavoriteCompanies::listSchedule(int index)
     return getListWorHour(index);
 }
 
+QList<QVariant> FavoriteCompanies::listCompanyForReport()
+{
+    return listCompanyByName();
+}
+

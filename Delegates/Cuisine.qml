@@ -27,6 +27,7 @@ Item {
         text: "Cuisine:"
         font.pointSize: pointSizeText * 1.3
         color: cText
+        visible: cuisineDescription.text.length !== 0
     }
 
     Text {
@@ -34,9 +35,8 @@ Item {
         anchors.left: cuisineLabel.right
         anchors.top: cuisineLabel.bottom
         anchors.topMargin: 10
-        visible: cuisineLabel.visible
-        text: "italian, european"
         color: cText
+        visible: text.length !== 0
     }
 
     Text {
@@ -71,6 +71,12 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             font.pointSize: pointSizeText
             color: cText
+
+            Rectangle{
+                anchors.fill: parent
+                color: "red"
+                opacity: 0.1
+            }
         }
     }
 

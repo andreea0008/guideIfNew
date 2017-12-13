@@ -39,7 +39,7 @@ Item{
             anchors.fill: parent
             onReleased: {
                 if(stackAllCategory.visible) stackAllCategory.pop()
-                if(stackLoverCategory.visible) stackLoverCategory.pop
+                if(stackLoverCategory.visible) stackLoverCategory.pop()
                 if(stackFavoriteCategory.visible) stackFavoriteCategory.pop()
                 if(stackCrownCategory.visible) stackCrownCategory.pop()
             }
@@ -61,5 +61,6 @@ Item{
         anchors.right: parent.right
         anchors.rightMargin: 10
         anchors.verticalCenter: parent.verticalCenter
+        visible: false
     }
 }

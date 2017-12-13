@@ -43,4 +43,9 @@ QList<QVariant> CrownCompanies::listSchedule(int index)
     return getListWorHour(index);
 }
 
+QList<QVariant> CrownCompanies::listCompanyForReport()
+{
+    return listCompanyByName();
+}
+
 

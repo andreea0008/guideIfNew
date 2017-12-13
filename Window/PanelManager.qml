@@ -30,6 +30,10 @@ Rectangle {
             switch(cat){
                 case 1: category = "Category"
                     break
+                case 2: category = "Category"
+                    break
+                case 3: category = "Category"
+                    break
                 case 4: category = "Category"
                     break
                 case 5: category = "Settings"

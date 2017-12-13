@@ -151,3 +151,13 @@ QList<QVariant> AbstractListCategory::getListWorHour(int index)
     }
     return list;
 }
+
+QList<QVariant> AbstractListCategory::listCompanyByName()
+{
+    QList<QVariant> list;
+    foreach (Company *company, m_dataCompany) {
+        list.push_back(company->getNameCompany());
+    }
+
+    return list;
+}

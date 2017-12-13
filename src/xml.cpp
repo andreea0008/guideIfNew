@@ -179,7 +179,7 @@ QVector<Company *> xml::loadFavoriteCategoryByType(int typeFavor)
                             scheduleList.push_back(xmlReader.readElementText());
                         }
                         if(xmlReader.name() == "description"){
-                            scheduleList.push_back(xmlReader.readElementText());
+                            description = xmlReader.readElementText();
                         }
                     }
                     if(!nameCompany.isEmpty()){

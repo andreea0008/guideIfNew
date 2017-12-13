@@ -18,6 +18,9 @@ void Lovecompanies::addCompany(const int idCompany, const QString &nameCompany,
 {
     if(isLove(idCompany))
         return;
+
+    qDebug() << /*shedule << address <<*/ description;
+
     addCompanyToList(idCompany, nameCompany, phones, shedule, address, description);
     xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::LOVE);
 }
@@ -40,5 +43,14 @@ QList<QVariant> Lovecompanies::listPhones(int index)
 
 QList<QVariant> Lovecompanies::listSchedule(int index)
 {
+    QList<QVariant> list = getListWorHour(index);
+    foreach (QVariant var, list) {
+        qDebug() << var;
+    }
     return getListWorHour(index);
+}
+
+QList<QVariant> Lovecompanies::listCompanyForReport()
+{
+    return listCompanyByName();
 }

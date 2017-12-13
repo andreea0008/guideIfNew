@@ -27,6 +27,7 @@
         <file>StackFavoriteCategory.qml</file>
         <file>Category/CompanyList.qml</file>
         <file>StackCrownCategory.qml</file>
+        <file>Settings.qml</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/Bodoni-Bold-Cyrillic.ttf</file>

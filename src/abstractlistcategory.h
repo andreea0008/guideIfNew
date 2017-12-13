@@ -30,6 +30,8 @@ public:
     QList<QVariant> getListPhones(int index);
     QList<QVariant>getListWorHour(int index);
 
+    QList<QVariant> listCompanyByName();
+
 protected:
     QHash<int, QByteArray> m_roles;
     QVector<Company *> m_dataCompany;
