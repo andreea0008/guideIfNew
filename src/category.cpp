@@ -94,17 +94,7 @@ void Category::deleteElement(int index)
 
 void Category::move(int from, int to)
 {
-    if(from > to){
-        beginMoveRows(QModelIndex(), from, from, QModelIndex(), to);
-        m_data.insert(to, m_data[from]);
-        m_data.removeAt(from +1);
-        endMoveRows();
-    }else{
-        beginMoveRows(QModelIndex(), from, from, QModelIndex(), to+1);
-        m_data.insert(to +1, m_data[from]);
-        m_data.removeAt(from);
-        endMoveRows();
-    }
+
     isMoved = true;
 }
 

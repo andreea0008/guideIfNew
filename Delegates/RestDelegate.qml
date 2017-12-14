@@ -79,6 +79,9 @@ ScrollView{
                 onCallToNumber: console.log("Call to - ", phone)
             }
 
+            SiteAndSocialNetworks{
+            }
+
             Cuisine{
                 id: cuisine
                 width: parent.width

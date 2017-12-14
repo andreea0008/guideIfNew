@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
 Rectangle{
+    id: control
     width: 40
     height: width
 
@@ -8,15 +9,15 @@ Rectangle{
 
     color: "transparent"
     border.color: "#f40612"
-    border.width: 3
-    radius: 10
+    border.width: width / 14
+    radius: width / 4
 
     Rectangle{
         anchors.centerIn: parent
-        width: 24
-        height: 24
+        width: control.width * 0.6
+        height: width
         color: isActive ? "#f40612" : "transparent"
-        radius: 5
+        radius: control.width / 8
 
     }
 

@@ -17,6 +17,13 @@ public:
     Q_INVOKABLE QList<QVariant> listPhones(int index);
     Q_INVOKABLE QList<QVariant> listSchedule(int index);
     Q_INVOKABLE QList<QVariant> listCompanyForReport();
+    Q_INVOKABLE void transitionItem(int from, int to);
+    Q_INVOKABLE void visibleChange();
+
+private:
+    bool isMoved;
+    bool isDelete;
+    bool isAdd;
 };
 
 #endif // CROWNCOMPANIES_H

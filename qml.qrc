@@ -28,6 +28,9 @@
         <file>Category/CompanyList.qml</file>
         <file>StackCrownCategory.qml</file>
         <file>Settings.qml</file>
+        <file>Delegates/SiteAndSocialNetworks.qml</file>
+        <file>Delegates/img/world.png</file>
+        <file>Delegates/img/facebook_logo.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/Bodoni-Bold-Cyrillic.ttf</file>

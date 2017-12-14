@@ -2,7 +2,10 @@
 #include "xml.h"
 #include <QDebug>
 FavoriteCompanies::FavoriteCompanies(QObject *parent)
-    :AbstractListCategory(parent)
+    :AbstractListCategory(parent),
+      isMoved(false),
+      isDelete(false),
+      isAdd(false)
 {
     setDataCompany(xml::getInstance()->loadFavoriteCategoryByType(xml::FAVORITE));
 }
@@ -16,14 +19,12 @@ void FavoriteCompanies::addCompany(const int idCompany, const QString &nameCompa
 {
     if(isFavorite(idCompany))
         return;
-    addCompanyToList(idCompany, nameCompany, phones, shedule, address, description);
-    xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::FAVORITE);
+    isAdd = addCompanyToList(idCompany, nameCompany, phones, shedule, address, description);
 }
 
 void FavoriteCompanies::deleteCompany(const int idCompany)
 {
     deleteCompanyFromList(idCompany);
-    xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::FAVORITE);
 }
 
 bool FavoriteCompanies::isFavorite(const int idCompany)
@@ -44,5 +45,17 @@ QList<QVariant> FavoriteCompanies::listSchedule(int index)
 QList<QVariant> FavoriteCompanies::listCompanyForReport()
 {
     return listCompanyByName();
+}
+
+void FavoriteCompanies::transitionItem(int from, int to)
+{
+    isMoved = moveItems(from, to);
+}
+
+void FavoriteCompanies::visibleChange()
+{
+    if(isMoved || isDelete || isAdd){
+        xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::FAVORITE);
+    }
 }
 

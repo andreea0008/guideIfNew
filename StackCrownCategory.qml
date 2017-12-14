@@ -16,8 +16,10 @@ StackView{
     default property PanelManager panelManager : PanelManager
 
     onVisibleChanged: {
-        if(!visible)
+        if(!visible){
+            CrownCompanies.visibleChange()
             releaseStack()
+        }
     }
 
     focus: true
@@ -75,9 +77,10 @@ StackView{
 
                 draggedItemParent: list
 
-                //                onMoveRectangleRequested: LoveCompanies.move(from, to)
+                onMoveRectangleRequested: CrownCompanies.transitionItem(from, to)
 
                 onClick: {
+                    console.log(CrownCompanies.listSchedule(index))
                     stackCrownCategory.push("qrc:/Delegates/RestDelegate.qml",
                                             {
                                                 "idCompany" : idCompany,

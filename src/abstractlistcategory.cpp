@@ -80,24 +80,28 @@ void AbstractListCategory::addCompanyToList(QString nameCompany)
     endInsertRows();
 }
 
-void AbstractListCategory::addCompanyToList(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address, const QString &description)
-{
+bool AbstractListCategory::addCompanyToList(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address, const QString &description)
+{   
     beginInsertRows(QModelIndex(), m_dataCompany.size(), m_dataCompany.size());
     m_dataCompany.push_front(new Company(idCompany, nameCompany, phones, shedule, address, description));
     updateRowData();
     endInsertRows();
+    return true;
 }
 
 
-void AbstractListCategory::deleteCompanyFromList(const int idCompany)
+bool AbstractListCategory::deleteCompanyFromList(const int idCompany)
 {
+    bool isRemove = false;
     for(int i = 0; i < m_dataCompany.size(); i++){
         if(dataCompany()[i]->getIdCompany() == idCompany){
             beginRemoveRows(QModelIndex(), i, i);
             m_dataCompany.removeAt(i);
             endRemoveRows();
+            isRemove = true;
         }
     }
+    return isRemove;
 }
 
 bool AbstractListCategory::isCurrentFavorite(const int idCompany)
@@ -158,6 +162,21 @@ QList<QVariant> AbstractListCategory::listCompanyByName()
     foreach (Company *company, m_dataCompany) {
         list.push_back(company->getNameCompany());
     }
-
     return list;
+}
+
+bool AbstractListCategory::moveItems(int from, int to)
+{
+    if(from > to){
+        beginMoveRows(QModelIndex(), from, from, QModelIndex(), to);
+        m_dataCompany.insert(to, m_dataCompany[from]);
+        m_dataCompany.removeAt(from +1);
+        endMoveRows();
+    }else{
+        beginMoveRows(QModelIndex(), from, from, QModelIndex(), to+1);
+        m_dataCompany.insert(to +1, m_dataCompany[from]);
+        m_dataCompany.removeAt(from);
+        endMoveRows();
+    }
+    return true;
 }

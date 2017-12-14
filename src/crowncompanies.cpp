@@ -4,7 +4,10 @@
 
 
 CrownCompanies::CrownCompanies(QObject *parent):
-    AbstractListCategory(parent)
+    AbstractListCategory(parent),
+    isMoved(false),
+    isDelete(false),
+    isAdd(false)
 {
     setDataCompany(xml::getInstance()->loadFavoriteCategoryByType(xml::CROWN));
 }
@@ -18,14 +21,13 @@ void CrownCompanies::addCompany(const int idCompany, const QString &nameCompany,
 {
     if(isCrown(idCompany))
         return;
-    addCompanyToList(idCompany, nameCompany, phones, shedule, address, description);
-    xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::CROWN);
+    isAdd = addCompanyToList(idCompany, nameCompany, phones, shedule, address, description);
+
 }
 
 void CrownCompanies::deleteCompany(const int idCompany)
 {
-    deleteCompanyFromList(idCompany);
-   xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::CROWN);
+    isDelete = deleteCompanyFromList(idCompany);
 }
 
 bool CrownCompanies::isCrown(const int idCompany)
@@ -46,6 +48,16 @@ QList<QVariant> CrownCompanies::listSchedule(int index)
 QList<QVariant> CrownCompanies::listCompanyForReport()
 {
     return listCompanyByName();
+}
+
+void CrownCompanies::transitionItem(int from, int to)
+{
+    isMoved = moveItems(from, to);
+}
+
+void CrownCompanies::visibleChange()
+{
+xml::getInstance()->saveFavoriteCategoryByType(m_dataCompany, xml::CROWN);
 }
 
 

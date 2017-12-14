@@ -16,8 +16,10 @@ StackView{
     default property PanelManager panelManager : PanelManager
 
     onVisibleChanged: {
-        if(!visible)
+        if(!visible){
+            FavoriteCompanies.visibleChange()
             releaseStack()
+        }
     }
 
     focus: true
@@ -75,7 +77,7 @@ StackView{
 
                 draggedItemParent: list
 
-//                onMoveRectangleRequested: LoveCompanies.move(from, to)
+                onMoveRectangleRequested: FavoriteCompanies.transitionItem(from, to)
 
                 onClick: {
                     stackFavoriteCategory.push("qrc:/Delegates/RestDelegate.qml",
@@ -85,12 +87,11 @@ StackView{
                                                    "address": addressCompany,
                                                    "listPhones": FavoriteCompanies.listPhones(index),
                                                    "listSchedule": FavoriteCompanies.listSchedule(index),
-                                                    "description": description
+                                                   "description": description
                                                })
                 }
-                }
-
             }
+        }
 
 
         Text{

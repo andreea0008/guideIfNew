@@ -45,7 +45,7 @@ void ListCompany::addCompany(const QString &nameCompany)
 }
 QList<QVariant> ListCompany::listPhones(int index)
 {
-    return getListWorHour(index);
+    return getListPhones(index);
 }
 
 QList<QVariant> ListCompany::listSchedule(int index)

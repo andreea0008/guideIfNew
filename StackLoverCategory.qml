@@ -16,8 +16,10 @@ StackView{
     default property PanelManager panelManager : PanelManager
 
     onVisibleChanged: {
-        if(!visible)
+        if(!visible){
+            LoveCompanies.visibleChange()
             releaseStack()
+        }
     }
 
     focus: true
@@ -74,7 +76,7 @@ StackView{
 
                 draggedItemParent: list
 
-//                onMoveRectangleRequested: LoveCompanies.move(from, to)
+                onMoveRectangleRequested: LoveCompanies.transitionItem(from, to)
 
                 onClick: {
                     stackLoverCategory.push("qrc:/Delegates/RestDelegate.qml",
