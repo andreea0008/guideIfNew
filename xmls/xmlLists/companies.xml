@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
+	<version>1.0</version>
     <channel>
 		<restourants>
 			<item>
@@ -11,6 +12,8 @@
 				<phone>+38097.90.99.991</phone>
 				<shedule>Пн - Пт|10:00 - 20:00</shedule>
 				<shedule>Сб - Нд|09:00 - 00:00</shedule>
+				<url>4seasons.if</url>
+				<facebook>facebook.com/4seasons</facebook>
 				<description>0. In this edition, we listen to a review 
 				of a new film called 'The Hoax' which stars Richard 
 				Gere. A hoax is a deception, a trick to make people 
@@ -27,6 +30,8 @@
 				<phone>+38097.90.09.999</phone>
 				<phone>+38097.90.19.990</phone>
 				<phone>+38097.90.29.991</phone>
+				<url>5seasons.if</url>
+				<facebook>facebook.com/5seasons</facebook>
 				<shedule>Пн - Пт|10:00 - 20:00</shedule>
 				<description>1. In this edition, we listen to a review 
 				of a new film called 'The Hoax' which stars Richard 
@@ -45,6 +50,8 @@
 				<phone>+38097.90.94.990</phone>
 				<phone>+38097.90.93.991</phone>
 				<shedule>Пн - Пт|10:00 - 20:00</shedule>
+				<url>6seasons.if</url>
+				<facebook>facebook.com/6seasons</facebook>
 				<description>2. In this edition, we listen to a review 
 				of a new film called 'The Hoax' which stars Richard 
 				Gere. A hoax is a deception, a trick to make people 
@@ -62,6 +69,8 @@
 				<phone>+38097.94.99.990</phone>
 				<phone>+38097.91.99.991</phone>
 				<shedule>Пн - Пт|10:00 - 20:00</shedule>
+				<url>7seasons.if</url>
+				<facebook>facebook.com/7seasons</facebook>
 				<description>3. In this edition, we listen to a review 
 				of a new film called 'The Hoax' which stars Richard 
 				Gere. A hoax is a deception, a trick to make people 

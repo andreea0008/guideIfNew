@@ -13,6 +13,8 @@ ScrollView{
     property string address: ""
     property variant listPhones: ""
     property variant listSchedule: ""
+    property string facebookLink: ""
+    property string siteLink: ""
     property alias description: description.text
 
 
@@ -41,21 +43,21 @@ ScrollView{
                 nameRestourant: scrollView.nameCompany
                 function addOrRemoveLoveFavorite(isLove){
                     if(isLove)
-                        LoveCompanies.addCompany(idCompany, nameRestourant, listPhones, listSchedule, scrollView.address, description.text)
+                        LoveCompanies.addCompany(idCompany, nameRestourant, listPhones, listSchedule, scrollView.address, description.text, facebookLink, siteLink)
                     else
                         LoveCompanies.deleteCompany(idCompany)
                 }
 
                 function addOrRemoveCrownFavorite(isCrown){
                     if(isCrown)
-                        CrownCompanies.addCompany(idCompany, nameRestourant, listPhones, listSchedule, scrollView.address, description.text)
+                        CrownCompanies.addCompany(idCompany, nameRestourant, listPhones, listSchedule, scrollView.address, description.text, facebookLink, siteLink)
                     else
                         CrownCompanies.deleteCompany(idCompany)
                 }
 
                 function addOrRemoveFavorite(isFavorite){
                     if(isFavorite)
-                        FavoriteCompanies.addCompany(idCompany, nameRestourant, listPhones, listSchedule, scrollView.address, description.text)
+                        FavoriteCompanies.addCompany(idCompany, nameRestourant, listPhones, listSchedule, scrollView.address, description.text, facebookLink, siteLink)
                     else
                         FavoriteCompanies.deleteCompany(idCompany)
                 }
@@ -80,12 +82,29 @@ ScrollView{
             }
 
             SiteAndSocialNetworks{
+                siteLink: scrollView.siteLink
+                facebookLink: scrollView.facebookLink
+                Rectangle{
+                    color: "red"
+                    opacity: 0.1
+                    anchors.fill: parent
+                }
             }
 
-            Cuisine{
-                id: cuisine
+//            Cuisine{
+//                id: cuisine
+//                width: parent.width
+//                schedule: listSchedule
+//                height: 170
+//                Rectangle{
+//                    color: "red"
+//                    opacity: 0.1
+//                    anchors.fill: parent
+//                }
+//            }
+
+            WorksHour{
                 width: parent.width
-                height: 200
                 schedule: listSchedule
             }
 
@@ -109,7 +128,7 @@ ScrollView{
         }
 
         function getHeightColumn(){
-            return head.height + address.height + phones.height + cuisine.height + description.height + 100
+            return head.height + address.height + phones.height /*+ cuisine.height*/ + description.height + 100
         } 
     }
 

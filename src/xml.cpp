@@ -131,6 +131,8 @@ void xml::saveFavoriteCategoryByType(QVector<Company *> &listCompany, int typeFa
                 xmlWriter.writeTextElement("shedule", tempSchedule);
 
             xmlWriter.writeTextElement("description", listCompany[i]->getDescription());
+            xmlWriter.writeTextElement("facebook", listCompany[i]->getFacebookUrl());
+            xmlWriter.writeTextElement("url", listCompany[i]->getUrl());
 
             xmlWriter.writeEndElement();
         }
@@ -160,30 +162,35 @@ QVector<Company *> xml::loadFavoriteCategoryByType(int typeFavor)
             while(xmlReader.readNextStartElement()){
                 if(xmlReader.name().contains("crown_id_company")){
                     int id;
-                    QString nameCompany, address, description;
+                    QString nameCompany, address, description, facebook, url;
                     QStringList phonesList, scheduleList;
                     while(xmlReader.readNextStartElement()){
 
                         if(xmlReader.name() == "id")
                             id = xmlReader.readElementText().toInt();
-                        if(xmlReader.name() == "company"){
+                        else if(xmlReader.name() == "company"){
                             nameCompany = xmlReader.readElementText();
                         }
-                        if(xmlReader.name() == "address"){
+                        else if(xmlReader.name() == "address"){
                             address = xmlReader.readElementText();
                         }
-                        if(xmlReader.name() == "phone"){
+                        else if(xmlReader.name() == "phone"){
                             phonesList.push_back(xmlReader.readElementText());
                         }
-                        if(xmlReader.name() == "shedule"){
+                        else if(xmlReader.name() == "shedule"){
                             scheduleList.push_back(xmlReader.readElementText());
                         }
-                        if(xmlReader.name() == "description"){
+                        else if(xmlReader.name() == "description"){
                             description = xmlReader.readElementText();
                         }
+                        else if(xmlReader.name() == "facebook"){
+                            facebook = xmlReader.readElementText();
+                        }
+                        else if(xmlReader.name() == "url")
+                            url = xmlReader.readElementText();
                     }
                     if(!nameCompany.isEmpty()){
-                        listCompany.push_back(new Company(id, nameCompany, phonesList, scheduleList, address, description));
+                        listCompany.push_back(new Company(id, nameCompany, phonesList, scheduleList, address, description, url, facebook));
                     }
                 }
 
@@ -197,8 +204,6 @@ QVector<Company *> xml::loadFavoriteCategoryByType(int typeFavor)
 bool xml::loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefault)
 {
     Q_UNUSED(isDefault);
-
-    //    QFile file(":/xmls/xmls/xmlLists/restourants.xml");
     QFile file(":/xmls/xmls/xmlLists/companies.xml");
 
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text | QFile::Truncate)){
@@ -213,13 +218,18 @@ bool xml::loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefa
         if(xmlReader.name() == "rss"){
             continue;
         }
+        if(xmlReader.name() == "version"){
+            versionCatalogCompanies = xmlReader.readElementText().toDouble();
+            qDebug() << "version: " << xmlReader.readElementText();
+            continue;
+        }
         if(xmlReader.name() == "channel"){
             continue;
         }
         if(xmlReader.name() == tag){
             while(xmlReader.readNextStartElement()){
                 if(xmlReader.name() == "item"){
-                    QString nameCompany, address, description;
+                    QString nameCompany, address, description, facebook, url, email;
                     QStringList phones, daysAndHour;
                     int id = 0;
                     while(xmlReader.readNextStartElement()){
@@ -235,11 +245,15 @@ bool xml::loadCompany(QVector<Company *> &listCompany, QString &tag, bool isDefa
                             daysAndHour.push_back(xmlReader.readElementText());
                         else if(xmlReader.name() == "description")
                             description = xmlReader.readElementText();
+                        else if(xmlReader.name() == "facebook")
+                            facebook = xmlReader.readElementText();
+                        else if(xmlReader.name() == "url")
+                            url = xmlReader.readElementText();
                         else
                             xmlReader.skipCurrentElement();
                     }
                     if(!nameCompany.isEmpty()){
-                        listCompany.push_back(new Company(id, nameCompany, phones, daysAndHour, address, description));
+                        listCompany.push_back(new Company(id, nameCompany, phones, daysAndHour, address, description, url, facebook));
                     }
                 }
             }
@@ -261,6 +275,36 @@ bool xml::isExistCustomFile()
 {
     QFile defaultFileCategories("CustomListCategory.xml");
     return defaultFileCategories.exists();
+}
+
+bool xml::isNeedUpdateListCompanies(double versionCatalog)
+{
+    getVersionCatalogCompanies();
+    return versionCatalog>versionCatalogCompanies;
+
+}
+
+bool xml::getVersionCatalogCompanies()
+{
+    QFile file(":/xmls/xmls/xmlLists/companies.xml");
+
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text | QFile::Truncate)){
+        qWarning("f_not_open");
+        return false;
+    }
+
+    QXmlStreamReader xmlReader(&file);
+
+    while(xmlReader.readNextStartElement()){
+        if(xmlReader.name() == "rss"){
+            continue;
+        }
+        if(xmlReader.name() == "version"){
+            versionCatalogCompanies = xmlReader.readElementText().toDouble();
+            return true;
+        }
+    }
+    return true;
 }
 
 QString xml::getPathToFileByTypeFavorite(int type)

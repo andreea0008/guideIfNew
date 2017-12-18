@@ -18,6 +18,9 @@ public:
     bool isExistDefaultFile();
     bool isExistCustomFile();
 
+    bool isNeedUpdateListCompanies(double versionCatalog);
+    bool getVersionCatalogCompanies();
+
     QString getPathToFileByTypeFavorite(int type);
     enum TYPE_FAVORITE{ FAVORITE, LOVE, CROWN } ;
 
@@ -33,6 +36,7 @@ private:
     const QString loveCompany;
     const QString favoriteCompany;
     const QString crownCompany;
+    double versionCatalogCompanies;
 };
 
 #endif // XML_H

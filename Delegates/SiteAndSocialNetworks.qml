@@ -5,6 +5,12 @@ Item {
     anchors.right: parent.right
     height: column.height
     property int heightItem: 40
+    property string siteLink: ""
+    property string facebookLink: ""
+
+    onVisibleChanged: {
+        console.log(height)
+    }
 
     Column{
         id: column
@@ -19,6 +25,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             height: heightItem
+            visible: siteLink.length !== 0
 
             Text {
                 id: wwwText
@@ -26,7 +33,7 @@ Item {
 
                 anchors.verticalCenter: parent.verticalCenter
                 color: "white"
-                text: qsTr("google.com.ua/mail/ua")
+                text: siteLink
                 font.pixelSize: parent.height * 0.5
             }
             Item{
@@ -54,6 +61,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             height: heightItem
+            visible: facebookLink.length > 0
 
             Text {
                 id: wwwFacebook
@@ -62,7 +70,7 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 elide: Text.ElideRight
                 color: "white"
-                text: qsTr("google.com.ua/mail/uafsdfsdf")
+                text: facebookLink
                 font.pixelSize: parent.height * 0.5
             }
             Item{

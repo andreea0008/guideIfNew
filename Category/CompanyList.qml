@@ -73,15 +73,17 @@ Item{
 
             onClick:{
                 stackAllCategory.push("qrc:/Delegates/RestDelegate.qml",
-                                           {
-                                               "idCompany" : idCompany,
-                                               "nameCompany": nameCompany,
-                                               "address": addressCompany,
-                                               "listPhones": ListCompanies.listPhones(index),
-                                               "listSchedule": ListCompanies.listSchedule(index),
-                                                "description": description
+                                      {
+                                          "idCompany" : idCompany,
+                                          "nameCompany": nameCompany,
+                                          "address": addressCompany,
+                                          "listPhones": ListCompanies.listPhones(index),
+                                          "listSchedule": ListCompanies.listSchedule(index),
+                                          "facebookLink": facebookCompany,
+                                          "siteLink": urlCompany,
+                                          "description": description
 
-                                           })
+                                      })
             }
 
         }

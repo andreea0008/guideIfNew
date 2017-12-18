@@ -16,6 +16,8 @@ Rectangle {
     default property PanelManager panelManager : PanelManager
     color: "#1b1b1b"
 
+    onVisibleChanged: console.log("visible")
+
     ColumnLayout{
         implicitHeight: parent.height
         implicitWidth: parent.width
@@ -67,22 +69,13 @@ Rectangle {
                 color: "white"
             }
 
-            Check{
-                id: check2
+            UpdateButton{
                 anchors.right: parent.right
                 anchors.rightMargin: window.width * 0.05
                 anchors.verticalCenter: parent.verticalCenter
-                height: parent.height * 0.6
-                width: height
+                visibleSettingsPage: window.visible
 
-                onIsActiveChanged: {
-                    ReportSelectedCompany.setNameFavoritesCompany(LoveCompanies.listCompanyForReport(),
-                                                                  FavoriteCompanies.listCompanyForReport(),
-                                                                  CrownCompanies.listCompanyForReport())
-                }
             }
         }
     }
-
-
 }

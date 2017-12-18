@@ -17,7 +17,7 @@ public:
 
     Company(int id, const QString &nameCompany, const QStringList &phonesCompany,
             const QStringList &schedule,  const QString &addressCompany = "", const QString &description = "",
-            const QString url = "", const QString email = "", const QString facebookUrl="", QObject *parent = 0);
+            const QString url = "", const QString facebookUrl="", QObject *parent = 0);
 
     int getIdCompany() const { return m_id; }
     QString getNameCompany() const { return m_company; }

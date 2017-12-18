@@ -31,6 +31,8 @@
         <file>Delegates/SiteAndSocialNetworks.qml</file>
         <file>Delegates/img/world.png</file>
         <file>Delegates/img/facebook_logo.png</file>
+        <file>Delegates/WorksHour.qml</file>
+        <file>Cells/UpdateButton.qml</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/Bodoni-Bold-Cyrillic.ttf</file>

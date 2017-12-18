@@ -87,6 +87,8 @@ StackView{
                                                    "address": addressCompany,
                                                    "listPhones": FavoriteCompanies.listPhones(index),
                                                    "listSchedule": FavoriteCompanies.listSchedule(index),
+                                                   "facebookLink": facebookCompany,
+                                                   "siteLink": urlCompany,
                                                    "description": description
                                                })
                 }

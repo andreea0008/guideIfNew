@@ -17,12 +17,13 @@ Lovecompanies::~Lovecompanies()
 
 void Lovecompanies::addCompany(const int idCompany, const QString &nameCompany,
                                const QStringList &phones, const QStringList &shedule,
-                               const QString &address,  const QString &description)
+                               const QString &address,  const QString &description,
+                               const QString &facebookUrl, const QString &url)
 {
     if(isLove(idCompany))
         return;
 
-    isAdd = addCompanyToList(idCompany, nameCompany, phones, shedule, address, description);
+    isAdd = addCompanyToList(idCompany, nameCompany, phones, shedule, address, description, facebookUrl, url);
 }
 
 void Lovecompanies::deleteCompany(const int idCompany)

@@ -17,11 +17,13 @@ CrownCompanies::~CrownCompanies()
 
 }
 
-void CrownCompanies::addCompany(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address,  const QString &description)
+void CrownCompanies::addCompany(const int idCompany, const QString &nameCompany, const QStringList &phones,
+                                const QStringList &shedule, const QString &address,  const QString &description,
+                                const QString &facebookUrl, const QString &url)
 {
     if(isCrown(idCompany))
         return;
-    isAdd = addCompanyToList(idCompany, nameCompany, phones, shedule, address, description);
+    isAdd = addCompanyToList(idCompany, nameCompany, phones, shedule, address, description, facebookUrl, url);
 
 }
 

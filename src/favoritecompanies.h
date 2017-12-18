@@ -11,7 +11,8 @@ public:
     explicit FavoriteCompanies(QObject *parent = 0);
     ~FavoriteCompanies();
 
-    Q_INVOKABLE void addCompany(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address, const QString &description);
+    Q_INVOKABLE void addCompany(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address,
+                                const QString &description, const QString &facebookUrl, const QString &url);
     Q_INVOKABLE void deleteCompany(const int idCompany);
     Q_INVOKABLE bool isFavorite(const int idCompany);
     Q_INVOKABLE QList<QVariant> listPhones(int index);

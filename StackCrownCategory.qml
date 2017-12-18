@@ -80,7 +80,6 @@ StackView{
                 onMoveRectangleRequested: CrownCompanies.transitionItem(from, to)
 
                 onClick: {
-                    console.log(CrownCompanies.listSchedule(index))
                     stackCrownCategory.push("qrc:/Delegates/RestDelegate.qml",
                                             {
                                                 "idCompany" : idCompany,
@@ -88,6 +87,8 @@ StackView{
                                                 "address": addressCompany,
                                                 "listPhones": CrownCompanies.listPhones(index),
                                                 "listSchedule": CrownCompanies.listSchedule(index),
+                                                "facebookLink": facebookCompany,
+                                                "siteLink": urlCompany,
                                                 "description": description
                                             })
                 }

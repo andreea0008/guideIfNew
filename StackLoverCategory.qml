@@ -79,14 +79,17 @@ StackView{
                 onMoveRectangleRequested: LoveCompanies.transitionItem(from, to)
 
                 onClick: {
+                    console.log(urlCompany, description)
                     stackLoverCategory.push("qrc:/Delegates/RestDelegate.qml",
-                                               {
-                                                   "idCompany" : idCompany,
-                                                   "nameCompany": nameCompany,
-                                                   "address": addressCompany,
-                                                   "listPhones": LoveCompanies.listPhones(index),
-                                                   "listSchedule": LoveCompanies.listSchedule(index),
-                                                    "description": description
+                                            {
+                                                "idCompany" : idCompany,
+                                                "nameCompany": nameCompany,
+                                                "address": addressCompany,
+                                                "listPhones": LoveCompanies.listPhones(index),
+                                                "listSchedule": LoveCompanies.listSchedule(index),
+                                                "facebookLink": facebookCompany,
+                                                "siteLink": urlCompany,
+                                                "description": description
                                                })
                 }
 

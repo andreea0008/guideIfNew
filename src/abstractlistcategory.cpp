@@ -80,10 +80,12 @@ void AbstractListCategory::addCompanyToList(QString nameCompany)
     endInsertRows();
 }
 
-bool AbstractListCategory::addCompanyToList(const int idCompany, const QString &nameCompany, const QStringList &phones, const QStringList &shedule, const QString &address, const QString &description)
+bool AbstractListCategory::addCompanyToList(const int idCompany, const QString &nameCompany, const QStringList &phones,
+                                            const QStringList &shedule, const QString &address, const QString &description,
+                                            const QString &facebookUrl, const QString &url)
 {   
     beginInsertRows(QModelIndex(), m_dataCompany.size(), m_dataCompany.size());
-    m_dataCompany.push_front(new Company(idCompany, nameCompany, phones, shedule, address, description));
+    m_dataCompany.push_front(new Company(idCompany, nameCompany, phones, shedule, address, description, url, facebookUrl));
     updateRowData();
     endInsertRows();
     return true;

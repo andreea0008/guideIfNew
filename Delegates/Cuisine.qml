@@ -15,10 +15,14 @@ Item {
 
     height: getHeight()
 
-    Component.onCompleted: {
-        height = getHeight()
+    onVisibleChanged: {
+        console.log("on_visible_chanhe")
     }
 
+    Component.onCompleted: {
+        console.log("on_complete_chanhe")
+        height = getHeight()
+    }
 
     Text {
         id: cuisineLabel
@@ -27,7 +31,7 @@ Item {
         text: "Cuisine:"
         font.pointSize: pointSizeText * 1.3
         color: cText
-        visible: cuisineDescription.text.length !== 0
+        visible: cuisineDescription.visible
     }
 
     Text {
@@ -42,7 +46,7 @@ Item {
     Text {
         id: hourLabelToday
         anchors.left: parent.left
-        anchors.top: cuisineDescription.bottom
+        anchors.top: cuisineDescription.visible ? cuisineDescription.bottom : mainBox.top
         anchors.topMargin: 15
         text: "Hours Today:"
         font.pointSize: pointSizeText * 1.3
@@ -81,6 +85,16 @@ Item {
     }
 
     function getHeight() {
-        return list.height + cuisineDescription.height + hourLabelToday.height + cuisineLabel.height
+        var heightCuisine = 0
+        if(list.visible)
+            heightCuisine += list.height
+        if(cuisineDescription.visible)
+            heightCuisine += cuisineDescription.height
+        if(hourLabelToday.visible)
+            heightCuisine += hourLabelToday.height
+        if(cuisineLabel.visible)
+            heightCuisine += cuisineLabel.height
+        console.log("heightCuisine", heightCuisine)
+        return heightCuisine
     }
 }
