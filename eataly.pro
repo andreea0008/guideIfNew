@@ -12,7 +12,9 @@ SOURCES += main.cpp \
     src/favoritecompanies.cpp \
     src/listcompany.cpp \
     src/crowncompanies.cpp \
-    src/abstractlistcategory.cpp
+    src/abstractlistcategory.cpp \
+    src/reportselectedcompanies.cpp \
+    src/feedback.cpp
 
 RESOURCES += qml.qrc \
     files.qrc
@@ -51,4 +53,6 @@ HEADERS += \
     src/favoritecompanies.h \
     src/listcompany.h \
     src/crowncompanies.h \
-    src/abstractlistcategory.h
+    src/abstractlistcategory.h \
+    src/reportselectedcompanies.h \
+    src/feedback.h

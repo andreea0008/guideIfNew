@@ -18,7 +18,7 @@ bool Settings::updateExist() const
 
 void Settings::getUpdateExist()
 {
-    setUpdateExist(xml::getInstance()->isNeedUpdateListCompanies(1.010));
+    setUpdateExist(xml::getInstance()->isNeedUpdateListCompanies(1.001));
 }
 
 void Settings::setIsOnline(bool isOnline)
