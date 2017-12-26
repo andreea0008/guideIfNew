@@ -1,14 +1,16 @@
 import QtQuick 2.0
 
 Item{
-    height: 80
+    height: heightColumn
     width: parent.width
+
     property int idCompany: 0
+    property alias nameRestourant: nameRest.text
+    property int  heightColumn: 80
 
     signal addToCrown(var isCrown)
     signal addToFavorite(var isFavorite)
     signal addToLove(var isLove)
-    property alias nameRestourant: nameRest.text
 
     QtObject{
         id: privateProperties
@@ -20,18 +22,39 @@ Item{
     Text{
         id: nameRest
         anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: loveItem.left
 
         font.pointSize: 20
         verticalAlignment: Text.AlignVCenter
-        text: "Eataly"
+        text: nameRestourant
         color: privateProperties.colorNameCompany
-        wrapMode: Text.Wrap
+        wrapMode: Text.WordWrap
+
+        Component.onCompleted: console.log(nameRest.height)
+
+        states: [
+        State{
+                name: "22px"
+                when: nameRest.text.length <= 15
+                PropertyChanges{ target: nameRest; font.pointSize: 22}
+            },
+            State{
+                    name: "17px"
+                    when: nameRest.text.length > 15 && nameRest.text.length <= 30
+                    PropertyChanges{ target: nameRest; font.pointSize: 17}
+                },
+            State{
+                    name: "15px"
+                    when: nameRest.text.length >30
+                    PropertyChanges{ target: nameRest; font.pointSize: 15}
+                }
+
+        ]
     }
 
     Item{
-        id: loveItem
+        id: crownItem
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -57,9 +80,78 @@ Item{
             }
 
             onIsSelectedChanged: addToCrown(isSelected)
-                /*{
-                isSelected ? CrownCompanies.addCompany(idCompany, nameRest.text) : CrownCompanies.deleteCompany(idCompany)
-            }*/
+
+            Rectangle{
+                anchors.fill: parent
+                color: privateProperties.shadowColor
+                visible: !parent.isSelected
+                opacity: privateProperties.shadow
+            }
+
+            MouseArea{
+                anchors.fill: parent
+                onClicked: parent.isSelected ? parent.isSelected = false : parent.isSelected = true
+            }
+        }
+    }
+
+    Item{
+        id: starItem
+        anchors.right: crownItem.left
+        anchors.rightMargin: 10
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        width: parent.height/2
+
+        Image{
+            id: starFavorite
+            anchors.centerIn: parent
+            source: "../Delegates/img/star.png"
+            height: parent.height/2
+            width: height
+            antialiasing: true
+
+            Component.onCompleted: isSelected = FavoriteCompanies.isFavorite(idCompany)
+
+            property bool isSelected: false
+
+            onIsSelectedChanged: addToFavorite(isSelected)
+
+            Rectangle{
+                anchors.fill: parent
+                color: privateProperties.shadowColor
+                visible: !parent.isSelected
+                opacity: privateProperties.shadow
+            }
+
+            MouseArea{
+                anchors.fill: parent
+                onClicked: parent.isSelected ? parent.isSelected = false : parent.isSelected = true
+            }
+        }
+    }
+
+    Item{
+        id: loveItem
+        anchors.right: starItem.left
+        anchors.rightMargin: 10
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        width: parent.height/2
+
+        Image{
+            id: loveFavorite
+            anchors.centerIn: parent
+            source: "../Delegates/img/favourite-star_not_selected.png"
+            height: parent.height/2
+            width: height
+            antialiasing: true
+
+            Component.onCompleted: isSelected = LoveCompanies.isLove(idCompany)
+
+            property bool isSelected: false
+
+            onIsSelectedChanged: addToLove(isSelected)
 
             Rectangle{
                 anchors.fill: parent
@@ -74,78 +166,5 @@ Item{
             }
         }
 
-
-
-        Item{
-            id: starItem
-            anchors.right: loveItem.left
-            anchors.rightMargin: 10
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            width: parent.height/2
-
-            Image{
-                id: starFavorite
-                anchors.centerIn: parent
-                source: "../Delegates/img/star.png"
-                height: parent.height/2
-                width: height
-                antialiasing: true
-
-                Component.onCompleted: isSelected = FavoriteCompanies.isFavorite(idCompany)
-
-                property bool isSelected: false
-                onIsSelectedChanged: addToFavorite(isSelected)
-//                    isSelected ? FavoriteCompanies.addCompany(idCompany, nameRest.text) : FavoriteCompanies.deleteCompany(idCompany)
-
-
-                Rectangle{
-                    anchors.fill: parent
-                    color: privateProperties.shadowColor
-                    visible: !parent.isSelected
-                    opacity: privateProperties.shadow
-                }
-
-                MouseArea{
-                    anchors.fill: parent
-                    onClicked: parent.isSelected ? parent.isSelected = false : parent.isSelected = true
-                }
-            }
-        }
-
-        Item{
-            anchors.right: starItem.left
-            anchors.rightMargin: 10
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            width: parent.height/2
-
-            Image{
-                id: loveFavorite
-                anchors.centerIn: parent
-                source: "../Delegates/img/favourite-star_not_selected.png"
-                height: parent.height/2
-                width: height
-                antialiasing: true
-
-                Component.onCompleted: isSelected = LoveCompanies.isLove(idCompany)
-
-                property bool isSelected: false
-
-                onIsSelectedChanged: addToLove(isSelected)
-
-                Rectangle{
-                    anchors.fill: parent
-                    color: privateProperties.shadowColor
-                    visible: !parent.isSelected
-                    opacity: privateProperties.shadow
-                }
-
-                MouseArea{
-                    anchors.fill: parent
-                    onClicked: parent.isSelected ? parent.isSelected = false : parent.isSelected = true
-                }
-            }
-        }
     }
 }

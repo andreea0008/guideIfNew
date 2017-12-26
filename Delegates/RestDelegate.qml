@@ -35,12 +35,12 @@ ScrollView{
 
             Head{
                 id: head
-
                 idCompany: scrollView.idCompany
                 onAddToCrown:  addOrRemoveCrownFavorite(isCrown)
                 onAddToFavorite: addOrRemoveFavorite(isFavorite)
                 onAddToLove: addOrRemoveLoveFavorite(isLove)
                 nameRestourant: scrollView.nameCompany
+
                 function addOrRemoveLoveFavorite(isLove){
                     if(isLove)
                         LoveCompanies.addCompany(idCompany, nameRestourant, listPhones, listSchedule, scrollView.address, description.text, facebookLink, siteLink)
