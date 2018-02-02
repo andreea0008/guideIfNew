@@ -24,38 +24,38 @@ Item{
 
     MouseArea{
         anchors.fill: parent
-        onClicked: clicked()
+        onClicked: click()
     }
 
     Rectangle{
         id: contentRectangleWrapper
         anchors.fill: parent
 
-        Drag.active: dragArea.drag.active
+//        Drag.active: dragArea.drag.active
 
         Drag.hotSpot {
             x: contentItem.width /2
             y: contentItem.height /2
         }
 
-        MouseArea{
-            id: dragArea
-            anchors.fill: parent
-            drag.target: parent
+//        MouseArea{
+//            id: dragArea
+//            anchors.fill: parent
+//            drag.target: parent
 
-            drag.axis: Drag.YAxis
-            drag.smoothed: false
+//            drag.axis: Drag.YAxis
+//            drag.smoothed: false
 
-            onPressed: pressedButton()
+//            onPressed: pressedButton()
 
-            onClicked: click()
+//            onClicked: click()
 
-            onReleased: {
-                if(drag.active)
-                    root.moveRectangleRquested()
-                releaseButton()
-            }
-        }
+//            onReleased: {
+//                if(drag.active)
+//                    root.moveRectangleRquested()
+//                releaseButton()
+//            }
+//        }
 
         states: [
             State {

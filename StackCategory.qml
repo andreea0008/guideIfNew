@@ -46,7 +46,7 @@ StackView{
                 anchors.leftMargin: parent.width * 0.01
                 anchors.rightMargin: parent.width * 0.01
 
-                height: stackAllCategory.height / 15
+                height: /*stackAllCategory.height / 15*/ControllerSize.heightListDelegate
 
                 property bool isPressed: false
 
@@ -74,18 +74,24 @@ StackView{
                         height: parent.height
                         anchors.left: parent.left
                         anchors.leftMargin: height/2
-                        font.pointSize: 12
+                        font.pointSize: ControllerSize.heightPixelSize
                         font.family: fontLoader.name
+
+//                        Rectangle{
+//                            width: 200
+//                            height: ControllerSize.heightPixelSize
+//                            anchors.verticalCenter: parent.verticalCenter
+//                        }
                     }
                 }
 
-                draggedItemParent: list
+//                draggedItemParent: list
 
-                onMoveRectangleRequested: CATEGORY.move(from, to)
+//                onMoveRectangleRequested: CATEGORY.move(from, to)
 
-                onPressedButton: isPressed = true
+//                onPressedButton: isPressed = true
 
-                onReleaseButton: isPressed = false
+//                onReleaseButton: isPressed = false
                 onClick: {
                     ListCompanies.setTagGroup(tag)
                     if(pathToFileCategory !== "path_offline_category"){

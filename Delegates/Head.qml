@@ -6,7 +6,7 @@ Item{
 
     property int idCompany: 0
     property alias nameRestourant: nameRest.text
-    property int  heightColumn: 80
+    property int  heightColumn: ControllerSize.heightScreen * 0.1
 
     signal addToCrown(var isCrown)
     signal addToFavorite(var isFavorite)
@@ -37,17 +37,17 @@ Item{
         State{
                 name: "22px"
                 when: nameRest.text.length <= 15
-                PropertyChanges{ target: nameRest; font.pointSize: 22}
+                PropertyChanges{ target: nameRest; font.pointSize: ControllerSize.heightPixelSize}
             },
             State{
                     name: "17px"
                     when: nameRest.text.length > 15 && nameRest.text.length <= 30
-                    PropertyChanges{ target: nameRest; font.pointSize: 17}
+                    PropertyChanges{ target: nameRest; font.pointSize: ControllerSize.heightPixelSize * 0.75}
                 },
             State{
                     name: "15px"
                     when: nameRest.text.length >30
-                    PropertyChanges{ target: nameRest; font.pointSize: 15}
+                    PropertyChanges{ target: nameRest; font.pointSize: ControllerSize.heightPixelSize * 0.5}
                 }
 
         ]
@@ -58,7 +58,7 @@ Item{
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        width: height/2
+        width: parent.width * 0.1
 
         Image{
             id: crownFavorite
@@ -101,7 +101,7 @@ Item{
         anchors.rightMargin: 10
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        width: parent.height/2
+        width: parent.width * 0.1
 
         Image{
             id: starFavorite
@@ -137,7 +137,7 @@ Item{
         anchors.rightMargin: 10
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        width: parent.height/2
+        width: parent.width * 0.1
 
         Image{
             id: loveFavorite

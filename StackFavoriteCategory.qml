@@ -48,7 +48,7 @@ StackView{
                 anchors.leftMargin: parent.width * 0.01
                 anchors.rightMargin: parent.width * 0.01
 
-                height: stackAllCategory.height / 15
+                height: /*stackAllCategory.height / 15*/ControllerSize.heightListDelegate
 
                 Rectangle{
                     anchors.fill: parent
@@ -70,14 +70,14 @@ StackView{
                         height: parent.height
                         anchors.left: parent.left
                         anchors.leftMargin: height/2
-                        font.pointSize: 12
+                        font.pointSize: ControllerSize.heightPixelSize
                         font.family: fontLoader.name
                     }
                 }
 
-                draggedItemParent: list
+//                draggedItemParent: list
 
-                onMoveRectangleRequested: FavoriteCompanies.transitionItem(from, to)
+//                onMoveRectangleRequested: FavoriteCompanies.transitionItem(from, to)
 
                 onClick: {
                     stackFavoriteCategory.push("qrc:/Delegates/RestDelegate.qml",

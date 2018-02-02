@@ -14,7 +14,8 @@ SOURCES += main.cpp \
     src/crowncompanies.cpp \
     src/abstractlistcategory.cpp \
     src/reportselectedcompanies.cpp \
-    src/feedback.cpp
+    src/feedback.cpp \
+    controllersize.cpp
 
 RESOURCES += qml.qrc \
     files.qrc
@@ -55,4 +56,5 @@ HEADERS += \
     src/crowncompanies.h \
     src/abstractlistcategory.h \
     src/reportselectedcompanies.h \
-    src/feedback.h
+    src/feedback.h \
+    controllersize.h

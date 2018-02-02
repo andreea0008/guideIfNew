@@ -8,6 +8,7 @@
 #include "src/listcompany.h"
 #include "src/reportselectedcompanies.h"
 #include "src/feedback.h"
+#include "controllersize.h"
 #include <QQmlContext>
 
 
@@ -27,6 +28,8 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("Settings", new Settings(&engine));
     engine.rootContext()->setContextProperty("ReportSelectedCompany", new ReportSelectedCompanies());
     engine.rootContext()->setContextProperty("Feedback", new Feedback());
+    ControllerSize controllerSize(&engine);
+    engine.rootContext()->setContextProperty("ControllerSize", &controllerSize);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();

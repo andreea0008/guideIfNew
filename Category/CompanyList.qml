@@ -30,7 +30,7 @@ Item{
             anchors.leftMargin: parent.width * 0.01
             anchors.rightMargin: parent.width * 0.01
 
-            height: stackAllCategory.height / 15
+            height: ControllerSize.heightListDelegate
 
             Rectangle{
                 anchors.fill: parent
@@ -58,7 +58,7 @@ Item{
                     height: parent.height
                     anchors.left: parent.left
                     anchors.leftMargin: height/2
-                    font.pointSize: 12
+                    font.pointSize: ControllerSize.heightPixelSize
                     font.family: fontLoader.name
                 }
             }
